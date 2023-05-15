@@ -1,0 +1,90 @@
+
+PLAY [Install required packages for ansible installation] **************************************************************************************************************************************************
+
+TASK [ansible_install : Install epel-release] **************************************************************************************************************************************************************
+ok: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [ansible_install : Install git] ***********************************************************************************************************************************************************************
+ok: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [ansible_install : Install unzip] *********************************************************************************************************************************************************************
+ok: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [ansible_install : Install Python 3] ******************************************************************************************************************************************************************
+ok: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [ansible_install : Install pip3] **********************************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [ansible_install : Install jmespath] ******************************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [ansible_install : Install Ansible] *******************************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [ansible_install : Install Ansible core 2.10.16] ******************************************************************************************************************************************************
+fatal: [ip-10-0-1-207.eu-central-1.compute.internal]: FAILED! => {"changed": true, "cmd": "python3 -m pip install ansible-base=='2.10.16'", "delta": "0:00:03.194007", "end": "2023-04-03 13:16:08.196241", "msg": "non-zero return code", "rc": 1, "start": "2023-04-03 13:16:05.002234", "stderr": "    ERROR: Command errored out with exit status 1:\n     command: /bin/python3 -u -c 'import io, os, sys, setuptools, tokenize; sys.argv[0] = '\"'\"'/tmp/pip-install-wnvvx2gn/ansible-base_21cf3ec630ce410a9fbd8e2fd83d909c/setup.py'\"'\"'; __file__='\"'\"'/tmp/pip-install-wnvvx2gn/ansible-base_21cf3ec630ce410a9fbd8e2fd83d909c/setup.py'\"'\"';f = getattr(tokenize, '\"'\"'open'\"'\"', open)(__file__) if os.path.exists(__file__) else io.StringIO('\"'\"'from setuptools import setup; setup()'\"'\"');code = f.read().replace('\"'\"'\\r\\n'\"'\"', '\"'\"'\\n'\"'\"');f.close();exec(compile(code, __file__, '\"'\"'exec'\"'\"'))' install --record /tmp/pip-record-w078z4rb/install-record.txt --single-version-externally-managed --compile --install-headers /usr/local/include/python3.6m/ansible-base\n         cwd: /tmp/pip-install-wnvvx2gn/ansible-base_21cf3ec630ce410a9fbd8e2fd83d909c/\n    Complete output (27 lines):\n    Traceback (most recent call last):\n      File \"<string>\", line 1, in <module>\n      File \"/tmp/pip-install-wnvvx2gn/ansible-base_21cf3ec630ce410a9fbd8e2fd83d909c/setup.py\", line 115, in <module>\n        _validate_install_ansible_base()\n      File \"/tmp/pip-install-wnvvx2gn/ansible-base_21cf3ec630ce410a9fbd8e2fd83d909c/setup.py\", line 106, in _validate_install_ansible_base\n        ''' % (stars, __version__, stars)\n    RuntimeError:\n    \n        ****************************************************************************\n    \n        Cannot install ansible-base with a pre-existing ansible==2.9.27\n        installation.\n    \n        Installing ansible-base with ansible-2.9 or older currently installed with\n        pip is known to cause problems. Please uninstall ansible and install the new\n        version:\n    \n            pip uninstall ansible\n            pip install ansible-base\n    \n        If you want to skip the conflict checks and manually resolve any issues\n        afterwards, set the ANSIBLE_SKIP_CONFLICT_CHECK environment variable:\n    \n            ANSIBLE_SKIP_CONFLICT_CHECK=1 pip install ansible-base\n    \n        ****************************************************************************\n    \n    ----------------------------------------\nERROR: Command errored out with exit status 1: /bin/python3 -u -c 'import io, os, sys, setuptools, tokenize; sys.argv[0] = '\"'\"'/tmp/pip-install-wnvvx2gn/ansible-base_21cf3ec630ce410a9fbd8e2fd83d909c/setup.py'\"'\"'; __file__='\"'\"'/tmp/pip-install-wnvvx2gn/ansible-base_21cf3ec630ce410a9fbd8e2fd83d909c/setup.py'\"'\"';f = getattr(tokenize, '\"'\"'open'\"'\"', open)(__file__) if os.path.exists(__file__) else io.StringIO('\"'\"'from setuptools import setup; setup()'\"'\"');code = f.read().replace('\"'\"'\\r\\n'\"'\"', '\"'\"'\\n'\"'\"');f.close();exec(compile(code, __file__, '\"'\"'exec'\"'\"'))' install --record /tmp/pip-record-w078z4rb/install-record.txt --single-version-externally-managed --compile --install-headers /usr/local/include/python3.6m/ansible-base Check the logs for full command output.", "stderr_lines": ["    ERROR: Command errored out with exit status 1:", "     command: /bin/python3 -u -c 'import io, os, sys, setuptools, tokenize; sys.argv[0] = '\"'\"'/tmp/pip-install-wnvvx2gn/ansible-base_21cf3ec630ce410a9fbd8e2fd83d909c/setup.py'\"'\"'; __file__='\"'\"'/tmp/pip-install-wnvvx2gn/ansible-base_21cf3ec630ce410a9fbd8e2fd83d909c/setup.py'\"'\"';f = getattr(tokenize, '\"'\"'open'\"'\"', open)(__file__) if os.path.exists(__file__) else io.StringIO('\"'\"'from setuptools import setup; setup()'\"'\"');code = f.read().replace('\"'\"'\\r\\n'\"'\"', '\"'\"'\\n'\"'\"');f.close();exec(compile(code, __file__, '\"'\"'exec'\"'\"'))' install --record /tmp/pip-record-w078z4rb/install-record.txt --single-version-externally-managed --compile --install-headers /usr/local/include/python3.6m/ansible-base", "         cwd: /tmp/pip-install-wnvvx2gn/ansible-base_21cf3ec630ce410a9fbd8e2fd83d909c/", "    Complete output (27 lines):", "    Traceback (most recent call last):", "      File \"<string>\", line 1, in <module>", "      File \"/tmp/pip-install-wnvvx2gn/ansible-base_21cf3ec630ce410a9fbd8e2fd83d909c/setup.py\", line 115, in <module>", "        _validate_install_ansible_base()", "      File \"/tmp/pip-install-wnvvx2gn/ansible-base_21cf3ec630ce410a9fbd8e2fd83d909c/setup.py\", line 106, in _validate_install_ansible_base", "        ''' % (stars, __version__, stars)", "    RuntimeError:", "    ", "        ****************************************************************************", "    ", "        Cannot install ansible-base with a pre-existing ansible==2.9.27", "        installation.", "    ", "        Installing ansible-base with ansible-2.9 or older currently installed with", "        pip is known to cause problems. Please uninstall ansible and install the new", "        version:", "    ", "            pip uninstall ansible", "            pip install ansible-base", "    ", "        If you want to skip the conflict checks and manually resolve any issues", "        afterwards, set the ANSIBLE_SKIP_CONFLICT_CHECK environment variable:", "    ", "            ANSIBLE_SKIP_CONFLICT_CHECK=1 pip install ansible-base", "    ", "        ****************************************************************************", "    ", "    ----------------------------------------", "ERROR: Command errored out with exit status 1: /bin/python3 -u -c 'import io, os, sys, setuptools, tokenize; sys.argv[0] = '\"'\"'/tmp/pip-install-wnvvx2gn/ansible-base_21cf3ec630ce410a9fbd8e2fd83d909c/setup.py'\"'\"'; __file__='\"'\"'/tmp/pip-install-wnvvx2gn/ansible-base_21cf3ec630ce410a9fbd8e2fd83d909c/setup.py'\"'\"';f = getattr(tokenize, '\"'\"'open'\"'\"', open)(__file__) if os.path.exists(__file__) else io.StringIO('\"'\"'from setuptools import setup; setup()'\"'\"');code = f.read().replace('\"'\"'\\r\\n'\"'\"', '\"'\"'\\n'\"'\"');f.close();exec(compile(code, __file__, '\"'\"'exec'\"'\"'))' install --record /tmp/pip-record-w078z4rb/install-record.txt --single-version-externally-managed --compile --install-headers /usr/local/include/python3.6m/ansible-base Check the logs for full command output."], "stdout": "Collecting ansible-base==2.10.16\n  Using cached ansible-base-2.10.16.tar.gz (6.1 MB)\n  Preparing metadata (setup.py): started\n  Preparing metadata (setup.py): finished with status 'done'\nRequirement already satisfied: jinja2 in /usr/lib/python3.6/site-packages (from ansible-base==2.10.16) (2.10.1)\nRequirement already satisfied: PyYAML in /usr/lib64/python3.6/site-packages (from ansible-base==2.10.16) (3.12)\nRequirement already satisfied: cryptography in /usr/lib64/python3.6/site-packages (from ansible-base==2.10.16) (3.2.1)\nRequirement already satisfied: packaging in /usr/local/lib/python3.6/site-packages (from ansible-base==2.10.16) (21.3)\nRequirement already satisfied: six>=1.4.1 in /usr/lib/python3.6/site-packages (from cryptography->ansible-base==2.10.16) (1.11.0)\nRequirement already satisfied: cffi!=1.11.3,>=1.8 in /usr/lib64/python3.6/site-packages (from cryptography->ansible-base==2.10.16) (1.11.5)\nRequirement already satisfied: MarkupSafe>=0.23 in /usr/lib64/python3.6/site-packages (from jinja2->ansible-base==2.10.16) (0.23)\nRequirement already satisfied: pyparsing!=3.0.5,>=2.0.2 in /usr/lib/python3.6/site-packages (from packaging->ansible-base==2.10.16) (2.1.10)\nRequirement already satisfied: pycparser in /usr/lib/python3.6/site-packages (from cffi!=1.11.3,>=1.8->cryptography->ansible-base==2.10.16) (2.14)\nUsing legacy 'setup.py install' for ansible-base, since package 'wheel' is not installed.\nInstalling collected packages: ansible-base\n    Running setup.py install for ansible-base: started\n    Running setup.py install for ansible-base: finished with status 'error'", "stdout_lines": ["Collecting ansible-base==2.10.16", "  Using cached ansible-base-2.10.16.tar.gz (6.1 MB)", "  Preparing metadata (setup.py): started", "  Preparing metadata (setup.py): finished with status 'done'", "Requirement already satisfied: jinja2 in /usr/lib/python3.6/site-packages (from ansible-base==2.10.16) (2.10.1)", "Requirement already satisfied: PyYAML in /usr/lib64/python3.6/site-packages (from ansible-base==2.10.16) (3.12)", "Requirement already satisfied: cryptography in /usr/lib64/python3.6/site-packages (from ansible-base==2.10.16) (3.2.1)", "Requirement already satisfied: packaging in /usr/local/lib/python3.6/site-packages (from ansible-base==2.10.16) (21.3)", "Requirement already satisfied: six>=1.4.1 in /usr/lib/python3.6/site-packages (from cryptography->ansible-base==2.10.16) (1.11.0)", "Requirement already satisfied: cffi!=1.11.3,>=1.8 in /usr/lib64/python3.6/site-packages (from cryptography->ansible-base==2.10.16) (1.11.5)", "Requirement already satisfied: MarkupSafe>=0.23 in /usr/lib64/python3.6/site-packages (from jinja2->ansible-base==2.10.16) (0.23)", "Requirement already satisfied: pyparsing!=3.0.5,>=2.0.2 in /usr/lib/python3.6/site-packages (from packaging->ansible-base==2.10.16) (2.1.10)", "Requirement already satisfied: pycparser in /usr/lib/python3.6/site-packages (from cffi!=1.11.3,>=1.8->cryptography->ansible-base==2.10.16) (2.14)", "Using legacy 'setup.py install' for ansible-base, since package 'wheel' is not installed.", "Installing collected packages: ansible-base", "    Running setup.py install for ansible-base: started", "    Running setup.py install for ansible-base: finished with status 'error'"]}
+...ignoring
+
+TASK [ansible_install : Create Directory /etc/ansible] *****************************************************************************************************************************************************
+ok: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [ansible_install : Copy ansible.cfg file to home dir] *************************************************************************************************************************************************
+ok: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [ansible_install : Copy ansible.cfg file to /etc/ansible/] ********************************************************************************************************************************************
+ok: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [hdp_libs : Install libs required by HDP] *************************************************************************************************************************************************************
+skipping: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [hdp_libs : Install the epel-release rpm from fedora remote repo required by HDP] *********************************************************************************************************************
+skipping: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+PLAY [Copy files for installation] *************************************************************************************************************************************************************************
+
+TASK [set_install_repo : Create ansible deployment directory] **********************************************************************************************************************************************
+ok: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [set_install_repo : Remove old ansible-repo] **********************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [set_install_repo : Get repository as a zip and unzip it] *********************************************************************************************************************************************
+ok: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [set_install_repo : Copy content of repository to ansible-repo] ***************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [cdp_ansible_files : Create environment folder for CLDR] **********************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [cdp_ansible_files : Copy CLDR hosts file] ************************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [cdp_ansible_files : Copy CLDR all file] **************************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [cdp_ansible_files : Copy CLDR cluster.yml file] ******************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [cdp_ansible_files : Copy CLDR extra_vars.yml file] ***************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [cdp_ansible_files : Copy kubeconfig file if needed] **************************************************************************************************************************************************
+skipping: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [cdp_ansible_files : Copy KTS tar file for CDH 6] *****************************************************************************************************************************************************
+skipping: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [cdp_ansible_files : Copy KTS-KMS tar file for CDH 6] *************************************************************************************************************************************************
+skipping: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [hdp_ansible_files : Copy HDP hosts file] *************************************************************************************************************************************************************
+skipping: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [hdp_ansible_files : Copy HDP all file] ***************************************************************************************************************************************************************
+skipping: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+PLAY RECAP *************************************************************************************************************************************************************************************************
+ip-10-0-1-207.eu-central-1.compute.internal : ok=20   changed=11   unreachable=0    failed=0    skipped=7    rescued=0    ignored=1   
+

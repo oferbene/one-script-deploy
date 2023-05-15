@@ -1,0 +1,142 @@
+
+PLAY [Setup network requirements for all machines] *********************************************************************************************************************************************************
+
+TASK [network_requirements : Copy local public key] ********************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [network_requirements : Create .ssh directory if not existing] ****************************************************************************************************************************************
+ok: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [network_requirements : Touch authorized_keys] ********************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [network_requirements : Add local key to hosts] *******************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [network_requirements : Destroy ~/local-key] **********************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [network_requirements : Copy /etc/hosts] **************************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [network_requirements : Change /etc/hosts] ************************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [network_requirements : Destroy etc_hosts] ************************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [network_requirements : Copy Known hosts file] ********************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [network_requirements : Setup known_hosts] ************************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [network_requirements : Destroy known_hosts] **********************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [network_requirements : Generate key] *****************************************************************************************************************************************************************
+ok: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [network_requirements : Get key generated for all hosts into one local file (authorized_keys)] ********************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+PLAY [Copy node_key and license to CM] *********************************************************************************************************************************************************************
+
+TASK [Copy license key file] *******************************************************************************************************************************************************************************
+fatal: [ip-10-0-1-207.eu-central-1.compute.internal]: FAILED! => {"changed": false, "msg": "src (or content) is required"}
+...ignoring
+
+TASK [node_key : Copy node key file] ***********************************************************************************************************************************************************************
+An exception occurred during task execution. To see the full traceback, use -vvv. The error was: If you are using a module and expect the file to exist on the remote, see the remote_src option
+fatal: [ip-10-0-1-207.eu-central-1.compute.internal]: FAILED! => {"changed": false, "msg": "Could not find or access './ofer-text.pem'\nSearched in:\n\t/home/ec2-user/one-script-deploy/playbooks/pre_install/node_key/files/./ofer-text.pem\n\t/home/ec2-user/one-script-deploy/playbooks/pre_install/node_key/./ofer-text.pem\n\t/home/ec2-user/one-script-deploy/playbooks/pre_install/node_key/tasks/files/./ofer-text.pem\n\t/home/ec2-user/one-script-deploy/playbooks/pre_install/node_key/tasks/./ofer-text.pem\n\t/home/ec2-user/one-script-deploy/playbooks/pre_install/files/./ofer-text.pem\n\t/home/ec2-user/one-script-deploy/playbooks/pre_install/./ofer-text.pem on the Ansible Controller.\nIf you are using a module and expect the file to exist on the remote, see the remote_src option"}
+...ignoring
+
+PLAY [Create authorized_keys file from all hosts keys file locally] ****************************************************************************************************************************************
+
+TASK [Create authorized_keys file] *************************************************************************************************************************************************************************
+changed: [localhost]
+
+TASK [Destroy authorized_keys] *****************************************************************************************************************************************************************************
+changed: [localhost]
+
+PLAY [Copy and set authorized_keys to all nodes] ***********************************************************************************************************************************************************
+
+TASK [auth_key_for_all : Copy authorized_keys file] ********************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [auth_key_for_all : Setup authorized_keys] ************************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [auth_key_for_all : Destroy authorized_keys] **********************************************************************************************************************************************************
+changed: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+PLAY [Fix FreeIPA Dbus configuration] **********************************************************************************************************************************************************************
+
+TASK [freeipa_dbus_fix : Copy DBUS config file] ************************************************************************************************************************************************************
+skipping: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [freeipa_dbus_fix : Ensure dbus is enabled and unmasked] **********************************************************************************************************************************************
+skipping: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [freeipa_dbus_fix : Restart DBUS] *********************************************************************************************************************************************************************
+skipping: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [freeipa_dbus_fix : Restart logind] *******************************************************************************************************************************************************************
+skipping: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+PLAY [Create certs for all hosts] **************************************************************************************************************************************************************************
+
+TASK [generate_certs : Delete cert directory] **************************************************************************************************************************************************************
+skipping: [localhost]
+
+TASK [generate_certs : Create cert directory] **************************************************************************************************************************************************************
+skipping: [localhost]
+
+TASK [generate_certs : Template openssl-ext.conf] **********************************************************************************************************************************************************
+skipping: [localhost] => (item=ip-10-0-1-207.eu-central-1.compute.internal) 
+
+TASK [generate_certs : Generate key and csr for hosts] *****************************************************************************************************************************************************
+skipping: [localhost] => (item=ip-10-0-1-207.eu-central-1.compute.internal) 
+
+TASK [generate_certs : Sign it using rootCA provided] ******************************************************************************************************************************************************
+skipping: [localhost] => (item=ip-10-0-1-207.eu-central-1.compute.internal) 
+
+TASK [generate_certs : Template openssl-ext.conf] **********************************************************************************************************************************************************
+skipping: [localhost]
+
+TASK [generate_certs : Generate key and csr for hosts] *****************************************************************************************************************************************************
+skipping: [localhost]
+
+TASK [generate_certs : Sign it using rootCA provided] ******************************************************************************************************************************************************
+skipping: [localhost]
+
+TASK [generate_certs : Create key password file] ***********************************************************************************************************************************************************
+skipping: [localhost]
+
+TASK [generate_certs : Create truststore password file] ****************************************************************************************************************************************************
+skipping: [localhost]
+
+TASK [generate_certs : Copy root cert] *********************************************************************************************************************************************************************
+skipping: [localhost]
+
+TASK [generate_certs : Archive certs directory] ************************************************************************************************************************************************************
+skipping: [localhost]
+
+PLAY [Copy certs to CM host] *******************************************************************************************************************************************************************************
+
+TASK [copy_certs : Delete cert directory] ******************************************************************************************************************************************************************
+skipping: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [copy_certs : Create cert directory] ******************************************************************************************************************************************************************
+skipping: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [copy_certs : Copy of cert archive] *******************************************************************************************************************************************************************
+skipping: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+TASK [copy_certs : Extract certs archive] ******************************************************************************************************************************************************************
+skipping: [ip-10-0-1-207.eu-central-1.compute.internal]
+
+PLAY RECAP *************************************************************************************************************************************************************************************************
+ip-10-0-1-207.eu-central-1.compute.internal : ok=18   changed=14   unreachable=0    failed=0    skipped=8    rescued=0    ignored=2   
+localhost                  : ok=2    changed=2    unreachable=0    failed=0    skipped=12   rescued=0    ignored=0   
+

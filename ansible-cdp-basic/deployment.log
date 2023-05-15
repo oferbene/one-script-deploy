@@ -1,0 +1,2388 @@
+- geerlingguy.postgresql (2.2.0) is already installed, skipping.
+Process install dependency map
+|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-Starting collection install process
+|Skipping 'ansible.posix' as it is already installed
+Skipping 'community.crypto' as it is already installed
+Skipping 'community.general' as it is already installed
+Skipping 'community.mysql' as it is already installed
+Skipping 'freeipa.ansible_freeipa' as it is already installed
+
+PLAY [Group hosts using host template information] *****************************
+
+TASK [Group by host template] **************************************************
+changed: [10.0.1.207]
+changed: [10.0.1.56]
+changed: [10.0.1.246]
+changed: [10.0.1.147]
+
+TASK [Initial pass of cluster definition] **************************************
+ok: [10.0.1.207]
+
+TASK [Find the correct host template] ******************************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [Group by service] ********************************************************
+ok: [10.0.1.207] => (item=HDFS)
+ok: [10.0.1.56] => (item=HDFS)
+ok: [10.0.1.246] => (item=HDFS)
+ok: [10.0.1.207] => (item=ZOOKEEPER)
+ok: [10.0.1.56] => (item=RANGER)
+ok: [10.0.1.246] => (item=ZOOKEEPER)
+ok: [10.0.1.56] => (item=ZOOKEEPER)
+ok: [10.0.1.147] => (item=HDFS)
+ok: [10.0.1.56] => (item=INFRA_SOLR)
+ok: [10.0.1.147] => (item=ZOOKEEPER)
+
+TASK [Group by service role] ***************************************************
+ok: [10.0.1.207] => (item=HDFS_JOURNALNODE)
+ok: [10.0.1.56] => (item=HDFS_NAMENODE)
+ok: [10.0.1.207] => (item=HDFS_GATEWAY)
+ok: [10.0.1.246] => (item=HDFS_DATANODE)
+ok: [10.0.1.56] => (item=HDFS_JOURNALNODE)
+ok: [10.0.1.207] => (item=ZOOKEEPER_SERVER)
+ok: [10.0.1.56] => (item=HDFS_FAILOVERCONTROLLER)
+ok: [10.0.1.246] => (item=HDFS_GATEWAY)
+ok: [10.0.1.147] => (item=HDFS_DATANODE)
+ok: [10.0.1.246] => (item=ZOOKEEPER_SERVER)
+ok: [10.0.1.56] => (item=HDFS_GATEWAY)
+ok: [10.0.1.147] => (item=HDFS_GATEWAY)
+ok: [10.0.1.56] => (item=RANGER_RANGER_TAGSYNC)
+ok: [10.0.1.147] => (item=ZOOKEEPER_SERVER)
+ok: [10.0.1.56] => (item=RANGER_RANGER_USERSYNC)
+ok: [10.0.1.56] => (item=ZOOKEEPER_SERVER)
+ok: [10.0.1.56] => (item=INFRA_SOLR_SOLR_SERVER)
+
+TASK [(debug) Show derived groups] *********************************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+PLAY [Verify inventory [verify_inventory]] *************************************
+
+TASK [verify/inventory : Fail if inventory groups are empty] *******************
+skipping: [localhost]
+
+TASK [verify/inventory : Ensure that FreeIPA and a ca_server are not configured together] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+
+PLAY [Verify definition [verify_definition]] ***********************************
+
+TASK [deployment/definition : Load cluster definition] *************************
+ok: [localhost]
+
+TASK [deployment/definition : set_fact] ****************************************
+ok: [localhost]
+
+TASK [deployment/definition : set_fact] ****************************************
+ok: [localhost]
+
+TASK [verify/definition : set_fact] ********************************************
+ok: [localhost]
+
+TASK [verify/definition : Ensure that TLS distribution is configured in the inventory] ***
+skipping: [localhost]
+
+TASK [verify/definition : Ensure that TLS distribution is not configured in the inventory] ***
+skipping: [localhost]
+
+TASK [verify/definition : Ensure that TLS is configured in the mgmt cluster] ***
+skipping: [localhost]
+
+TASK [verify/definition : set_fact] ********************************************
+ok: [localhost]
+
+TASK [verify/definition : set_fact] ********************************************
+ok: [localhost]
+
+TASK [verify/definition : Ensure that all inventory templates match definition templates] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All inventory templates matched against clusters"
+}
+
+TASK [verify/definition : Ensure that all definition templates match inventory templates] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All cluster templates matched against inventory"
+}
+
+TASK [verify/definition : set_fact] ********************************************
+ok: [localhost]
+
+TASK [verify/definition : Ensure that Kerberos is not specified when not in use] ***
+skipping: [localhost]
+
+TASK [verify/definition : Ensure that Kerberos is specified when used] *********
+ok: [localhost] => {
+    "changed": false,
+    "msg": "The KDC host has been configured correctly"
+}
+
+TASK [verify/definition : Ensure that the KDC host is only specified in one place] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "The KDC host is specified correctly in one location"
+}
+
+TASK [verify/definition : Ensure that at most one host is specified in the 'krb5_server' group] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "'krb5_server' is configured correctly"
+}
+
+TASK [verify/definition : set_fact] ********************************************
+ok: [localhost]
+
+TASK [verify/definition : set_fact] ********************************************
+ok: [localhost]
+
+TASK [verify/definition : Ensure there is one (and only one) KTS cluster] ******
+skipping: [localhost]
+
+TASK [verify/definition : Ensure there is one (and only one) active KTS] *******
+skipping: [localhost]
+
+TASK [verify/definition : Ensure there is one (and only one) passive KTS] ******
+skipping: [localhost]
+
+TASK [verify/definition : Ensure there is one or more KMS servers] *************
+skipping: [localhost]
+
+TASK [verify/definition : set_fact] ********************************************
+ok: [localhost]
+
+TASK [verify/definition : Ensure that Kerberos is enabled alongside Ranger and Sentry] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "Kerberos is enabled on each cluster with Ranger or Sentry"
+}
+
+TASK [verify/definition : Ensure that Ranger and Sentry are enabled alongside Kerberos (warning)] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "Ranger or Sentry is present on each cluster with Kerberos"
+}
+
+TASK [verify/definition : set_fact] ********************************************
+ok: [localhost]
+
+TASK [verify/definition : Ensure the truststore is properly named for zookeeper] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "The keystore and truststore end with a valid extension"
+}
+
+PLAY RECAP *********************************************************************
+10.0.1.147                 : ok=4    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+10.0.1.207                 : ok=5    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+10.0.1.246                 : ok=4    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+10.0.1.56                  : ok=4    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+localhost                  : ok=20   changed=0    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0   
+
+
+PLAY [Group hosts by whether TLS is enabled] ***********************************
+
+TASK [Group hosts based on whether TLS flag is set in inventory] ***************
+changed: [10.0.1.207]
+changed: [10.0.1.56]
+changed: [10.0.1.246]
+changed: [10.0.1.147]
+
+PLAY [Create temp directory] ***************************************************
+
+TASK [Create temp dir] *********************************************************
+ok: [10.0.1.56]
+ok: [10.0.1.207]
+ok: [10.0.1.147]
+ok: [10.0.1.246]
+
+PLAY [Apply OS pre-requisite configurations] ***********************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/os : Include variables] ******************************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/os : Include variables] ******************************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/os : Update kernel flags] ****************************************
+ok: [10.0.1.147] => (item={'key': 'vm.swappiness', 'value': '1'})
+ok: [10.0.1.56] => (item={'key': 'vm.swappiness', 'value': '1'})
+ok: [10.0.1.207] => (item={'key': 'vm.swappiness', 'value': '1'})
+ok: [10.0.1.246] => (item={'key': 'vm.swappiness', 'value': '1'})
+ok: [10.0.1.56] => (item={'key': 'vm.overcommit_memory', 'value': '1'})
+ok: [10.0.1.207] => (item={'key': 'vm.overcommit_memory', 'value': '1'})
+ok: [10.0.1.147] => (item={'key': 'vm.overcommit_memory', 'value': '1'})
+ok: [10.0.1.246] => (item={'key': 'vm.overcommit_memory', 'value': '1'})
+ok: [10.0.1.56] => (item={'key': 'net.ipv6.conf.all.disable_ipv6', 'value': '1'})
+ok: [10.0.1.207] => (item={'key': 'net.ipv6.conf.all.disable_ipv6', 'value': '1'})
+ok: [10.0.1.147] => (item={'key': 'net.ipv6.conf.all.disable_ipv6', 'value': '1'})
+ok: [10.0.1.246] => (item={'key': 'net.ipv6.conf.all.disable_ipv6', 'value': '1'})
+ok: [10.0.1.56] => (item={'key': 'net.ipv6.conf.default.disable_ipv6', 'value': '1'})
+ok: [10.0.1.147] => (item={'key': 'net.ipv6.conf.default.disable_ipv6', 'value': '1'})
+ok: [10.0.1.207] => (item={'key': 'net.ipv6.conf.default.disable_ipv6', 'value': '1'})
+ok: [10.0.1.246] => (item={'key': 'net.ipv6.conf.default.disable_ipv6', 'value': '1'})
+ok: [10.0.1.56] => (item={'key': 'net.ipv6.conf.lo.disable_ipv6', 'value': '1'})
+ok: [10.0.1.147] => (item={'key': 'net.ipv6.conf.lo.disable_ipv6', 'value': '1'})
+ok: [10.0.1.207] => (item={'key': 'net.ipv6.conf.lo.disable_ipv6', 'value': '1'})
+ok: [10.0.1.246] => (item={'key': 'net.ipv6.conf.lo.disable_ipv6', 'value': '1'})
+
+TASK [prereqs/os : Populate service facts] *************************************
+ok: [10.0.1.56]
+ok: [10.0.1.147]
+ok: [10.0.1.207]
+ok: [10.0.1.246]
+
+TASK [prereqs/os : Disable unnecessary services] *******************************
+skipping: [10.0.1.207] => (item=bluetooth) 
+skipping: [10.0.1.56] => (item=bluetooth) 
+skipping: [10.0.1.246] => (item=bluetooth) 
+skipping: [10.0.1.147] => (item=bluetooth) 
+changed: [10.0.1.56] => (item=chronyd)
+changed: [10.0.1.147] => (item=chronyd)
+changed: [10.0.1.246] => (item=chronyd)
+skipping: [10.0.1.56] => (item=cups) 
+skipping: [10.0.1.147] => (item=cups) 
+changed: [10.0.1.207] => (item=chronyd)
+skipping: [10.0.1.246] => (item=cups) 
+skipping: [10.0.1.207] => (item=cups) 
+ok: [10.0.1.56] => (item=ip6tables)
+ok: [10.0.1.147] => (item=ip6tables)
+ok: [10.0.1.246] => (item=ip6tables)
+ok: [10.0.1.207] => (item=ip6tables)
+skipping: [10.0.1.147] => (item=postfix) 
+skipping: [10.0.1.56] => (item=postfix) 
+skipping: [10.0.1.246] => (item=postfix) 
+skipping: [10.0.1.147] => (item=tuned) 
+skipping: [10.0.1.207] => (item=postfix) 
+skipping: [10.0.1.246] => (item=tuned) 
+skipping: [10.0.1.56] => (item=tuned) 
+skipping: [10.0.1.207] => (item=tuned) 
+
+TASK [prereqs/os : Install DNS utils package] **********************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.147]
+ok: [10.0.1.246]
+
+TASK [prereqs/os : Gather the package facts] ***********************************
+ok: [10.0.1.246]
+ok: [10.0.1.56]
+ok: [10.0.1.147]
+ok: [10.0.1.207]
+
+TASK [prereqs/os : Install ntp service if ntp or chrony is not installed] ******
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/os : set ntp_service variable if chrony is installed] ************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/os : Enable chronyd service] *************************************
+changed: [10.0.1.207]
+changed: [10.0.1.56]
+changed: [10.0.1.246]
+changed: [10.0.1.147]
+
+TASK [prereqs/os : Install nscd service] ***************************************
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+ok: [10.0.1.207]
+
+TASK [prereqs/os : Enable nscd service] ****************************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.147]
+ok: [10.0.1.246]
+
+TASK [prereqs/os : Disable nscd caches for services 'passwd', 'group', 'netgroup'] ***
+ok: [10.0.1.56]
+ok: [10.0.1.207]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/os : Install rngd service] ***************************************
+included: /home/ec2-user/deployment/ansible-repo/roles/prereqs/os/tasks/rngd.yml for 10.0.1.207, 10.0.1.56, 10.0.1.246, 10.0.1.147
+
+TASK [prereqs/os : Install rngd] ***********************************************
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+ok: [10.0.1.207]
+
+TASK [prereqs/os : Enable rngd] ************************************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/os : Configure rngd to use /dev/urandom (RHEL/CentOS 7)] *********
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.147]
+ok: [10.0.1.246]
+
+TASK [prereqs/os : Configure rngd to use /dev/urandom (Ubuntu)] ****************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/os : Apply OS-specific configurations] ***************************
+included: /home/ec2-user/deployment/ansible-repo/roles/prereqs/os/tasks/main-RedHat.yml for 10.0.1.207, 10.0.1.56, 10.0.1.246, 10.0.1.147
+
+TASK [prereqs/os : Disable SELinux] ********************************************
+ok: [10.0.1.207]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+ok: [10.0.1.56]
+
+TASK [prereqs/os : Disable Transparent Huge Pages until reboot] ****************
+changed: [10.0.1.56] => (item=enabled)
+changed: [10.0.1.207] => (item=enabled)
+changed: [10.0.1.246] => (item=enabled)
+changed: [10.0.1.147] => (item=enabled)
+changed: [10.0.1.56] => (item=defrag)
+changed: [10.0.1.207] => (item=defrag)
+changed: [10.0.1.246] => (item=defrag)
+changed: [10.0.1.147] => (item=defrag)
+
+TASK [prereqs/os : Disable Transparent Huge Pages permanently] *****************
+ok: [10.0.1.207] => (item=enabled)
+ok: [10.0.1.56] => (item=enabled)
+ok: [10.0.1.246] => (item=enabled)
+ok: [10.0.1.147] => (item=enabled)
+ok: [10.0.1.56] => (item=defrag)
+ok: [10.0.1.246] => (item=defrag)
+ok: [10.0.1.207] => (item=defrag)
+ok: [10.0.1.147] => (item=defrag)
+
+TASK [prereqs/os : Disable Transparent Huge Pages in GRUB config] **************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/os : Rebuild GRUB] ***********************************************
+changed: [10.0.1.56]
+changed: [10.0.1.246]
+changed: [10.0.1.207]
+changed: [10.0.1.147]
+
+TASK [prereqs/os : Ensure logind is enabled and unmasked] **********************
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+ok: [10.0.1.207]
+
+PLAY [Create local user accounts] **********************************************
+
+TASK [prereqs/user_accounts : Include user groups vars] ************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/user_accounts : Create hadoop group] *****************************
+ok: [10.0.1.56]
+ok: [10.0.1.207]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/user_accounts : debug] *******************************************
+ok: [10.0.1.207] => {
+    "msg": "If you have a failure during user creation, please ensure that users and groups can be created locally or that they are already setup correctly, with no collisions, if managed elsewhere. The user module error may not identify the root cause."
+}
+
+TASK [prereqs/user_accounts : Create local user accounts] **********************
+ok: [10.0.1.207] => (item={'user': 'accumulo', 'home': '/var/lib/accumulo', 'comment': 'Accumulo'})
+ok: [10.0.1.56] => (item={'user': 'accumulo', 'home': '/var/lib/accumulo', 'comment': 'Accumulo'})
+ok: [10.0.1.147] => (item={'user': 'accumulo', 'home': '/var/lib/accumulo', 'comment': 'Accumulo'})
+ok: [10.0.1.246] => (item={'user': 'accumulo', 'home': '/var/lib/accumulo', 'comment': 'Accumulo'})
+ok: [10.0.1.207] => (item={'user': 'atlas', 'home': '/var/lib/atlas', 'comment': 'Atlas', 'extra_groups': ['hadoop']})
+ok: [10.0.1.56] => (item={'user': 'atlas', 'home': '/var/lib/atlas', 'comment': 'Atlas', 'extra_groups': ['hadoop']})
+ok: [10.0.1.147] => (item={'user': 'atlas', 'home': '/var/lib/atlas', 'comment': 'Atlas', 'extra_groups': ['hadoop']})
+ok: [10.0.1.246] => (item={'user': 'atlas', 'home': '/var/lib/atlas', 'comment': 'Atlas', 'extra_groups': ['hadoop']})
+ok: [10.0.1.56] => (item={'user': 'cloudera-scm', 'home': '/var/lib/cloudera-scm-server', 'comment': 'Cloudera Manager', 'mode': '770', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.207] => (item={'user': 'cloudera-scm', 'home': '/var/lib/cloudera-scm-server', 'comment': 'Cloudera Manager', 'mode': '770', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.147] => (item={'user': 'cloudera-scm', 'home': '/var/lib/cloudera-scm-server', 'comment': 'Cloudera Manager', 'mode': '770', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.246] => (item={'user': 'cloudera-scm', 'home': '/var/lib/cloudera-scm-server', 'comment': 'Cloudera Manager', 'mode': '770', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.56] => (item={'user': 'cruisecontrol', 'home': '/var/lib/cruise_control', 'comment': 'Cruise Control', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'cruisecontrol', 'home': '/var/lib/cruise_control', 'comment': 'Cruise Control', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'cruisecontrol', 'home': '/var/lib/cruise_control', 'comment': 'Cruise Control', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'cruisecontrol', 'home': '/var/lib/cruise_control', 'comment': 'Cruise Control', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'druid', 'home': '/var/lib/druid', 'comment': 'Druid', 'extra_groups': ['hadoop']})
+ok: [10.0.1.207] => (item={'user': 'druid', 'home': '/var/lib/druid', 'comment': 'Druid', 'extra_groups': ['hadoop']})
+ok: [10.0.1.147] => (item={'user': 'druid', 'home': '/var/lib/druid', 'comment': 'Druid', 'extra_groups': ['hadoop']})
+ok: [10.0.1.246] => (item={'user': 'druid', 'home': '/var/lib/druid', 'comment': 'Druid', 'extra_groups': ['hadoop']})
+ok: [10.0.1.56] => (item={'user': 'flink', 'home': '/var/lib/flink', 'comment': 'Flink', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'flink', 'home': '/var/lib/flink', 'comment': 'Flink', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'flink', 'home': '/var/lib/flink', 'comment': 'Flink', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'flink', 'home': '/var/lib/flink', 'comment': 'Flink', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'flume', 'home': '/var/lib/flume-ng', 'comment': 'Flume', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'flume', 'home': '/var/lib/flume-ng', 'comment': 'Flume', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'flume', 'home': '/var/lib/flume-ng', 'comment': 'Flume', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'flume', 'home': '/var/lib/flume-ng', 'comment': 'Flume', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'hbase', 'home': '/var/lib/hbase', 'comment': 'HBase', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'hbase', 'home': '/var/lib/hbase', 'comment': 'HBase', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'hbase', 'home': '/var/lib/hbase', 'comment': 'HBase', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'hbase', 'home': '/var/lib/hbase', 'comment': 'HBase', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'hdfs', 'home': '/var/lib/hadoop-hdfs', 'comment': 'Hadoop HDFS', 'extra_groups': ['hadoop']})
+ok: [10.0.1.147] => (item={'user': 'hdfs', 'home': '/var/lib/hadoop-hdfs', 'comment': 'Hadoop HDFS', 'extra_groups': ['hadoop']})
+ok: [10.0.1.207] => (item={'user': 'hdfs', 'home': '/var/lib/hadoop-hdfs', 'comment': 'Hadoop HDFS', 'extra_groups': ['hadoop']})
+ok: [10.0.1.246] => (item={'user': 'hdfs', 'home': '/var/lib/hadoop-hdfs', 'comment': 'Hadoop HDFS', 'extra_groups': ['hadoop']})
+ok: [10.0.1.56] => (item={'user': 'hive', 'home': '/var/lib/hive', 'comment': 'Hive', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'hive', 'home': '/var/lib/hive', 'comment': 'Hive', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'hive', 'home': '/var/lib/hive', 'comment': 'Hive', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'hive', 'home': '/var/lib/hive', 'comment': 'Hive', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'httpfs', 'home': '/var/lib/hadoop-httpfs', 'comment': 'Hadoop HTTPFS', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'httpfs', 'home': '/var/lib/hadoop-httpfs', 'comment': 'Hadoop HTTPFS', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'httpfs', 'home': '/var/lib/hadoop-httpfs', 'comment': 'Hadoop HTTPFS', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'httpfs', 'home': '/var/lib/hadoop-httpfs', 'comment': 'Hadoop HTTPFS', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'hue', 'home': '/usr/lib/hue', 'comment': 'Hue', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.147] => (item={'user': 'hue', 'home': '/usr/lib/hue', 'comment': 'Hue', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.207] => (item={'user': 'hue', 'home': '/usr/lib/hue', 'comment': 'Hue', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.246] => (item={'user': 'hue', 'home': '/usr/lib/hue', 'comment': 'Hue', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.56] => (item={'user': 'impala', 'home': '/var/lib/impala', 'comment': 'Impala', 'extra_groups': ['hive'], 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.147] => (item={'user': 'impala', 'home': '/var/lib/impala', 'comment': 'Impala', 'extra_groups': ['hive'], 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.246] => (item={'user': 'impala', 'home': '/var/lib/impala', 'comment': 'Impala', 'extra_groups': ['hive'], 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.207] => (item={'user': 'impala', 'home': '/var/lib/impala', 'comment': 'Impala', 'extra_groups': ['hive'], 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.56] => (item={'user': 'kafka', 'home': '/var/lib/kafka', 'comment': 'Kafka', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'kafka', 'home': '/var/lib/kafka', 'comment': 'Kafka', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'kafka', 'home': '/var/lib/kafka', 'comment': 'Kafka', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'kafka', 'home': '/var/lib/kafka', 'comment': 'Kafka', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'keytrustee', 'home': '/var/lib/keytrustee', 'comment': 'KeyTrustee KMS', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.147] => (item={'user': 'keytrustee', 'home': '/var/lib/keytrustee', 'comment': 'KeyTrustee KMS', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.207] => (item={'user': 'keytrustee', 'home': '/var/lib/keytrustee', 'comment': 'KeyTrustee KMS', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.246] => (item={'user': 'keytrustee', 'home': '/var/lib/keytrustee', 'comment': 'KeyTrustee KMS', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.56] => (item={'user': 'kms', 'home': '/var/lib/hadoop-kms', 'comment': 'Hadoop KMS', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'kms', 'home': '/var/lib/hadoop-kms', 'comment': 'Hadoop KMS', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'kms', 'home': '/var/lib/hadoop-kms', 'comment': 'Hadoop KMS', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'kms', 'home': '/var/lib/hadoop-kms', 'comment': 'Hadoop KMS', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'knox', 'home': '/var/lib/knox', 'comment': 'Knox', 'extra_groups': ['hadoop'], 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'knox', 'home': '/var/lib/knox', 'comment': 'Knox', 'extra_groups': ['hadoop'], 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'knox', 'home': '/var/lib/knox', 'comment': 'Knox', 'extra_groups': ['hadoop'], 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'knox', 'home': '/var/lib/knox', 'comment': 'Knox', 'extra_groups': ['hadoop'], 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'kudu', 'home': '/var/lib/kudu', 'comment': 'Kudu', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.147] => (item={'user': 'kudu', 'home': '/var/lib/kudu', 'comment': 'Kudu', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.207] => (item={'user': 'kudu', 'home': '/var/lib/kudu', 'comment': 'Kudu', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.246] => (item={'user': 'kudu', 'home': '/var/lib/kudu', 'comment': 'Kudu', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.56] => (item={'user': 'livy', 'home': '/var/lib/livy', 'comment': 'Livy', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'livy', 'home': '/var/lib/livy', 'comment': 'Livy', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'livy', 'home': '/var/lib/livy', 'comment': 'Livy', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'livy', 'home': '/var/lib/livy', 'comment': 'Livy', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'mapred', 'home': '/var/lib/hadoop-mapreduce', 'comment': 'Hadoop MapReduce', 'extra_groups': ['hadoop']})
+ok: [10.0.1.147] => (item={'user': 'mapred', 'home': '/var/lib/hadoop-mapreduce', 'comment': 'Hadoop MapReduce', 'extra_groups': ['hadoop']})
+ok: [10.0.1.207] => (item={'user': 'mapred', 'home': '/var/lib/hadoop-mapreduce', 'comment': 'Hadoop MapReduce', 'extra_groups': ['hadoop']})
+ok: [10.0.1.246] => (item={'user': 'mapred', 'home': '/var/lib/hadoop-mapreduce', 'comment': 'Hadoop MapReduce', 'extra_groups': ['hadoop']})
+ok: [10.0.1.56] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi'})
+ok: [10.0.1.147] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi'})
+ok: [10.0.1.207] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi'})
+ok: [10.0.1.246] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi'})
+ok: [10.0.1.56] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry'})
+ok: [10.0.1.147] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry'})
+ok: [10.0.1.207] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry'})
+ok: [10.0.1.246] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry'})
+ok: [10.0.1.56] => (item={'user': 'oozie', 'home': '/var/lib/oozie', 'comment': 'Oozie User', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'oozie', 'home': '/var/lib/oozie', 'comment': 'Oozie User', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'oozie', 'home': '/var/lib/oozie', 'comment': 'Oozie User', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'oozie', 'home': '/var/lib/oozie', 'comment': 'Oozie User', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'phoenix', 'home': '/var/lib/phoenix', 'comment': 'Phoenix User'})
+ok: [10.0.1.147] => (item={'user': 'phoenix', 'home': '/var/lib/phoenix', 'comment': 'Phoenix User'})
+ok: [10.0.1.246] => (item={'user': 'phoenix', 'home': '/var/lib/phoenix', 'comment': 'Phoenix User'})
+ok: [10.0.1.207] => (item={'user': 'phoenix', 'home': '/var/lib/phoenix', 'comment': 'Phoenix User'})
+ok: [10.0.1.56] => (item={'user': 'ranger', 'home': '/var/lib/ranger', 'comment': 'Ranger', 'extra_groups': ['hadoop']})
+ok: [10.0.1.147] => (item={'user': 'ranger', 'home': '/var/lib/ranger', 'comment': 'Ranger', 'extra_groups': ['hadoop']})
+ok: [10.0.1.246] => (item={'user': 'ranger', 'home': '/var/lib/ranger', 'comment': 'Ranger', 'extra_groups': ['hadoop']})
+ok: [10.0.1.207] => (item={'user': 'ranger', 'home': '/var/lib/ranger', 'comment': 'Ranger', 'extra_groups': ['hadoop']})
+ok: [10.0.1.56] => (item={'user': 'rangerraz', 'home': '/var/lib/rangerraz', 'comment': 'Ranger Raz User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.147] => (item={'user': 'rangerraz', 'home': '/var/lib/rangerraz', 'comment': 'Ranger Raz User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.246] => (item={'user': 'rangerraz', 'home': '/var/lib/rangerraz', 'comment': 'Ranger Raz User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.207] => (item={'user': 'rangerraz', 'home': '/var/lib/rangerraz', 'comment': 'Ranger Raz User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.56] => (item={'user': 'rangertagsync', 'home': '/var/lib/rangertagsync', 'comment': 'Ranger Tagsync User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.147] => (item={'user': 'rangertagsync', 'home': '/var/lib/rangertagsync', 'comment': 'Ranger Tagsync User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.207] => (item={'user': 'rangertagsync', 'home': '/var/lib/rangertagsync', 'comment': 'Ranger Tagsync User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.246] => (item={'user': 'rangertagsync', 'home': '/var/lib/rangertagsync', 'comment': 'Ranger Tagsync User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.56] => (item={'user': 'schemaregistry', 'home': '/var/lib/schemaregistry', 'comment': 'Schema Registry', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'schemaregistry', 'home': '/var/lib/schemaregistry', 'comment': 'Schema Registry', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'schemaregistry', 'home': '/var/lib/schemaregistry', 'comment': 'Schema Registry', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'schemaregistry', 'home': '/var/lib/schemaregistry', 'comment': 'Schema Registry', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'sentry', 'home': '/var/lib/sentry', 'comment': 'Sentry'})
+ok: [10.0.1.147] => (item={'user': 'sentry', 'home': '/var/lib/sentry', 'comment': 'Sentry'})
+ok: [10.0.1.207] => (item={'user': 'sentry', 'home': '/var/lib/sentry', 'comment': 'Sentry'})
+ok: [10.0.1.246] => (item={'user': 'sentry', 'home': '/var/lib/sentry', 'comment': 'Sentry'})
+ok: [10.0.1.56] => (item={'user': 'solr', 'home': '/var/lib/solr', 'comment': 'Solr', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'solr', 'home': '/var/lib/solr', 'comment': 'Solr', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'solr', 'home': '/var/lib/solr', 'comment': 'Solr', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'solr', 'home': '/var/lib/solr', 'comment': 'Solr', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'spark', 'home': '/var/lib/spark', 'comment': 'Spark', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'spark', 'home': '/var/lib/spark', 'comment': 'Spark', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'spark', 'home': '/var/lib/spark', 'comment': 'Spark', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'spark', 'home': '/var/lib/spark', 'comment': 'Spark', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'spark2', 'home': '/var/lib/spark2', 'comment': 'Spark2'})
+ok: [10.0.1.147] => (item={'user': 'spark2', 'home': '/var/lib/spark2', 'comment': 'Spark2'})
+ok: [10.0.1.246] => (item={'user': 'spark2', 'home': '/var/lib/spark2', 'comment': 'Spark2'})
+ok: [10.0.1.207] => (item={'user': 'spark2', 'home': '/var/lib/spark2', 'comment': 'Spark2'})
+ok: [10.0.1.56] => (item={'user': 'sqoop', 'home': '/var/lib/sqoop', 'comment': 'Sqoop'})
+ok: [10.0.1.147] => (item={'user': 'sqoop', 'home': '/var/lib/sqoop', 'comment': 'Sqoop'})
+ok: [10.0.1.207] => (item={'user': 'sqoop', 'home': '/var/lib/sqoop', 'comment': 'Sqoop'})
+ok: [10.0.1.246] => (item={'user': 'sqoop', 'home': '/var/lib/sqoop', 'comment': 'Sqoop'})
+ok: [10.0.1.56] => (item={'user': 'sqoop2', 'home': '/var/lib/sqoop2', 'comment': 'Sqoop2', 'extra_groups': ['sqoop']})
+ok: [10.0.1.147] => (item={'user': 'sqoop2', 'home': '/var/lib/sqoop2', 'comment': 'Sqoop2', 'extra_groups': ['sqoop']})
+ok: [10.0.1.207] => (item={'user': 'sqoop2', 'home': '/var/lib/sqoop2', 'comment': 'Sqoop2', 'extra_groups': ['sqoop']})
+ok: [10.0.1.246] => (item={'user': 'sqoop2', 'home': '/var/lib/sqoop2', 'comment': 'Sqoop2', 'extra_groups': ['sqoop']})
+ok: [10.0.1.56] => (item={'user': 'ssb', 'home': '/var/lib/ssb', 'comment': 'SSB'})
+ok: [10.0.1.147] => (item={'user': 'ssb', 'home': '/var/lib/ssb', 'comment': 'SSB'})
+ok: [10.0.1.207] => (item={'user': 'ssb', 'home': '/var/lib/ssb', 'comment': 'SSB'})
+ok: [10.0.1.246] => (item={'user': 'ssb', 'home': '/var/lib/ssb', 'comment': 'SSB'})
+ok: [10.0.1.56] => (item={'user': 'streamsmsgmgr', 'home': '/var/lib/streams_messaging_manager', 'comment': 'Streams Messaging Manager', 'keystore_acl': True, 'key_acl': True})
+ok: [10.0.1.147] => (item={'user': 'streamsmsgmgr', 'home': '/var/lib/streams_messaging_manager', 'comment': 'Streams Messaging Manager', 'keystore_acl': True, 'key_acl': True})
+ok: [10.0.1.207] => (item={'user': 'streamsmsgmgr', 'home': '/var/lib/streams_messaging_manager', 'comment': 'Streams Messaging Manager', 'keystore_acl': True, 'key_acl': True})
+ok: [10.0.1.246] => (item={'user': 'streamsmsgmgr', 'home': '/var/lib/streams_messaging_manager', 'comment': 'Streams Messaging Manager', 'keystore_acl': True, 'key_acl': True})
+ok: [10.0.1.56] => (item={'user': 'streamsrepmgr', 'home': '/var/lib/streams_replication_manager', 'comment': 'Streams Replication Manager', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'streamsrepmgr', 'home': '/var/lib/streams_replication_manager', 'comment': 'Streams Replication Manager', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'streamsrepmgr', 'home': '/var/lib/streams_replication_manager', 'comment': 'Streams Replication Manager', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'streamsrepmgr', 'home': '/var/lib/streams_replication_manager', 'comment': 'Streams Replication Manager', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'superset', 'home': '/var/lib/superset', 'comment': 'Superset'})
+ok: [10.0.1.147] => (item={'user': 'superset', 'home': '/var/lib/superset', 'comment': 'Superset'})
+ok: [10.0.1.246] => (item={'user': 'superset', 'home': '/var/lib/superset', 'comment': 'Superset'})
+ok: [10.0.1.207] => (item={'user': 'superset', 'home': '/var/lib/superset', 'comment': 'Superset'})
+ok: [10.0.1.56] => (item={'user': 'yarn', 'home': '/var/lib/hadoop-yarn', 'comment': 'Hadoop Yarn', 'extra_groups': ['hadoop', 'spark']})
+ok: [10.0.1.147] => (item={'user': 'yarn', 'home': '/var/lib/hadoop-yarn', 'comment': 'Hadoop Yarn', 'extra_groups': ['hadoop', 'spark']})
+ok: [10.0.1.246] => (item={'user': 'yarn', 'home': '/var/lib/hadoop-yarn', 'comment': 'Hadoop Yarn', 'extra_groups': ['hadoop', 'spark']})
+ok: [10.0.1.207] => (item={'user': 'yarn', 'home': '/var/lib/hadoop-yarn', 'comment': 'Hadoop Yarn', 'extra_groups': ['hadoop', 'spark']})
+ok: [10.0.1.56] => (item={'user': 'zeppelin', 'home': '/var/lib/zeppelin', 'comment': 'Zeppelin', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'zeppelin', 'home': '/var/lib/zeppelin', 'comment': 'Zeppelin', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'zeppelin', 'home': '/var/lib/zeppelin', 'comment': 'Zeppelin', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'zeppelin', 'home': '/var/lib/zeppelin', 'comment': 'Zeppelin', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'zookeeper', 'home': '/var/lib/zookeeper', 'comment': 'ZooKeeper', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'zookeeper', 'home': '/var/lib/zookeeper', 'comment': 'ZooKeeper', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'zookeeper', 'home': '/var/lib/zookeeper', 'comment': 'ZooKeeper', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'zookeeper', 'home': '/var/lib/zookeeper', 'comment': 'ZooKeeper', 'keystore_acl': True})
+
+TASK [prereqs/user_accounts : Set home directory permissions] ******************
+ok: [10.0.1.207] => (item={'user': 'accumulo', 'home': '/var/lib/accumulo', 'comment': 'Accumulo'})
+ok: [10.0.1.56] => (item={'user': 'accumulo', 'home': '/var/lib/accumulo', 'comment': 'Accumulo'})
+ok: [10.0.1.246] => (item={'user': 'accumulo', 'home': '/var/lib/accumulo', 'comment': 'Accumulo'})
+ok: [10.0.1.147] => (item={'user': 'accumulo', 'home': '/var/lib/accumulo', 'comment': 'Accumulo'})
+ok: [10.0.1.207] => (item={'user': 'atlas', 'home': '/var/lib/atlas', 'comment': 'Atlas', 'extra_groups': ['hadoop']})
+ok: [10.0.1.56] => (item={'user': 'atlas', 'home': '/var/lib/atlas', 'comment': 'Atlas', 'extra_groups': ['hadoop']})
+ok: [10.0.1.246] => (item={'user': 'atlas', 'home': '/var/lib/atlas', 'comment': 'Atlas', 'extra_groups': ['hadoop']})
+ok: [10.0.1.147] => (item={'user': 'atlas', 'home': '/var/lib/atlas', 'comment': 'Atlas', 'extra_groups': ['hadoop']})
+ok: [10.0.1.207] => (item={'user': 'cloudera-scm', 'home': '/var/lib/cloudera-scm-server', 'comment': 'Cloudera Manager', 'mode': '770', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.56] => (item={'user': 'cloudera-scm', 'home': '/var/lib/cloudera-scm-server', 'comment': 'Cloudera Manager', 'mode': '770', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.246] => (item={'user': 'cloudera-scm', 'home': '/var/lib/cloudera-scm-server', 'comment': 'Cloudera Manager', 'mode': '770', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.147] => (item={'user': 'cloudera-scm', 'home': '/var/lib/cloudera-scm-server', 'comment': 'Cloudera Manager', 'mode': '770', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.207] => (item={'user': 'cruisecontrol', 'home': '/var/lib/cruise_control', 'comment': 'Cruise Control', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'cruisecontrol', 'home': '/var/lib/cruise_control', 'comment': 'Cruise Control', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'cruisecontrol', 'home': '/var/lib/cruise_control', 'comment': 'Cruise Control', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'cruisecontrol', 'home': '/var/lib/cruise_control', 'comment': 'Cruise Control', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'druid', 'home': '/var/lib/druid', 'comment': 'Druid', 'extra_groups': ['hadoop']})
+ok: [10.0.1.56] => (item={'user': 'druid', 'home': '/var/lib/druid', 'comment': 'Druid', 'extra_groups': ['hadoop']})
+ok: [10.0.1.246] => (item={'user': 'druid', 'home': '/var/lib/druid', 'comment': 'Druid', 'extra_groups': ['hadoop']})
+ok: [10.0.1.147] => (item={'user': 'druid', 'home': '/var/lib/druid', 'comment': 'Druid', 'extra_groups': ['hadoop']})
+ok: [10.0.1.207] => (item={'user': 'flink', 'home': '/var/lib/flink', 'comment': 'Flink', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'flink', 'home': '/var/lib/flink', 'comment': 'Flink', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'flink', 'home': '/var/lib/flink', 'comment': 'Flink', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'flink', 'home': '/var/lib/flink', 'comment': 'Flink', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'flume', 'home': '/var/lib/flume-ng', 'comment': 'Flume', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'flume', 'home': '/var/lib/flume-ng', 'comment': 'Flume', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'flume', 'home': '/var/lib/flume-ng', 'comment': 'Flume', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'flume', 'home': '/var/lib/flume-ng', 'comment': 'Flume', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'hbase', 'home': '/var/lib/hbase', 'comment': 'HBase', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'hbase', 'home': '/var/lib/hbase', 'comment': 'HBase', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'hbase', 'home': '/var/lib/hbase', 'comment': 'HBase', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'hbase', 'home': '/var/lib/hbase', 'comment': 'HBase', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'hdfs', 'home': '/var/lib/hadoop-hdfs', 'comment': 'Hadoop HDFS', 'extra_groups': ['hadoop']})
+ok: [10.0.1.207] => (item={'user': 'hdfs', 'home': '/var/lib/hadoop-hdfs', 'comment': 'Hadoop HDFS', 'extra_groups': ['hadoop']})
+ok: [10.0.1.246] => (item={'user': 'hdfs', 'home': '/var/lib/hadoop-hdfs', 'comment': 'Hadoop HDFS', 'extra_groups': ['hadoop']})
+ok: [10.0.1.147] => (item={'user': 'hdfs', 'home': '/var/lib/hadoop-hdfs', 'comment': 'Hadoop HDFS', 'extra_groups': ['hadoop']})
+ok: [10.0.1.56] => (item={'user': 'hive', 'home': '/var/lib/hive', 'comment': 'Hive', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'hive', 'home': '/var/lib/hive', 'comment': 'Hive', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'hive', 'home': '/var/lib/hive', 'comment': 'Hive', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'hive', 'home': '/var/lib/hive', 'comment': 'Hive', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'httpfs', 'home': '/var/lib/hadoop-httpfs', 'comment': 'Hadoop HTTPFS', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'httpfs', 'home': '/var/lib/hadoop-httpfs', 'comment': 'Hadoop HTTPFS', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'httpfs', 'home': '/var/lib/hadoop-httpfs', 'comment': 'Hadoop HTTPFS', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'httpfs', 'home': '/var/lib/hadoop-httpfs', 'comment': 'Hadoop HTTPFS', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'hue', 'home': '/usr/lib/hue', 'comment': 'Hue', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.207] => (item={'user': 'hue', 'home': '/usr/lib/hue', 'comment': 'Hue', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.246] => (item={'user': 'hue', 'home': '/usr/lib/hue', 'comment': 'Hue', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.147] => (item={'user': 'hue', 'home': '/usr/lib/hue', 'comment': 'Hue', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.56] => (item={'user': 'impala', 'home': '/var/lib/impala', 'comment': 'Impala', 'extra_groups': ['hive'], 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.207] => (item={'user': 'impala', 'home': '/var/lib/impala', 'comment': 'Impala', 'extra_groups': ['hive'], 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.246] => (item={'user': 'impala', 'home': '/var/lib/impala', 'comment': 'Impala', 'extra_groups': ['hive'], 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.147] => (item={'user': 'impala', 'home': '/var/lib/impala', 'comment': 'Impala', 'extra_groups': ['hive'], 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.56] => (item={'user': 'kafka', 'home': '/var/lib/kafka', 'comment': 'Kafka', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'kafka', 'home': '/var/lib/kafka', 'comment': 'Kafka', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'kafka', 'home': '/var/lib/kafka', 'comment': 'Kafka', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'kafka', 'home': '/var/lib/kafka', 'comment': 'Kafka', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'keytrustee', 'home': '/var/lib/keytrustee', 'comment': 'KeyTrustee KMS', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.207] => (item={'user': 'keytrustee', 'home': '/var/lib/keytrustee', 'comment': 'KeyTrustee KMS', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.147] => (item={'user': 'keytrustee', 'home': '/var/lib/keytrustee', 'comment': 'KeyTrustee KMS', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.246] => (item={'user': 'keytrustee', 'home': '/var/lib/keytrustee', 'comment': 'KeyTrustee KMS', 'keystore_acl': True, 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.56] => (item={'user': 'kms', 'home': '/var/lib/hadoop-kms', 'comment': 'Hadoop KMS', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'kms', 'home': '/var/lib/hadoop-kms', 'comment': 'Hadoop KMS', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'kms', 'home': '/var/lib/hadoop-kms', 'comment': 'Hadoop KMS', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'kms', 'home': '/var/lib/hadoop-kms', 'comment': 'Hadoop KMS', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'knox', 'home': '/var/lib/knox', 'comment': 'Knox', 'extra_groups': ['hadoop'], 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'knox', 'home': '/var/lib/knox', 'comment': 'Knox', 'extra_groups': ['hadoop'], 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'knox', 'home': '/var/lib/knox', 'comment': 'Knox', 'extra_groups': ['hadoop'], 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'knox', 'home': '/var/lib/knox', 'comment': 'Knox', 'extra_groups': ['hadoop'], 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'kudu', 'home': '/var/lib/kudu', 'comment': 'Kudu', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.207] => (item={'user': 'kudu', 'home': '/var/lib/kudu', 'comment': 'Kudu', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.147] => (item={'user': 'kudu', 'home': '/var/lib/kudu', 'comment': 'Kudu', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.246] => (item={'user': 'kudu', 'home': '/var/lib/kudu', 'comment': 'Kudu', 'key_acl': True, 'key_password_acl': True})
+ok: [10.0.1.56] => (item={'user': 'livy', 'home': '/var/lib/livy', 'comment': 'Livy', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'livy', 'home': '/var/lib/livy', 'comment': 'Livy', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'livy', 'home': '/var/lib/livy', 'comment': 'Livy', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'livy', 'home': '/var/lib/livy', 'comment': 'Livy', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'mapred', 'home': '/var/lib/hadoop-mapreduce', 'comment': 'Hadoop MapReduce', 'extra_groups': ['hadoop']})
+ok: [10.0.1.207] => (item={'user': 'mapred', 'home': '/var/lib/hadoop-mapreduce', 'comment': 'Hadoop MapReduce', 'extra_groups': ['hadoop']})
+ok: [10.0.1.147] => (item={'user': 'mapred', 'home': '/var/lib/hadoop-mapreduce', 'comment': 'Hadoop MapReduce', 'extra_groups': ['hadoop']})
+ok: [10.0.1.246] => (item={'user': 'mapred', 'home': '/var/lib/hadoop-mapreduce', 'comment': 'Hadoop MapReduce', 'extra_groups': ['hadoop']})
+ok: [10.0.1.56] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi'})
+ok: [10.0.1.207] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi'})
+ok: [10.0.1.147] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi'})
+ok: [10.0.1.246] => (item={'user': 'nifi', 'home': '/var/lib/nifi', 'command': 'NiFi'})
+ok: [10.0.1.56] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry'})
+ok: [10.0.1.207] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry'})
+ok: [10.0.1.147] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry'})
+ok: [10.0.1.246] => (item={'user': 'nifiregistry', 'home': '/var/lib/nifiregistry', 'command': 'NiFi Registry'})
+ok: [10.0.1.56] => (item={'user': 'oozie', 'home': '/var/lib/oozie', 'comment': 'Oozie User', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'oozie', 'home': '/var/lib/oozie', 'comment': 'Oozie User', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'oozie', 'home': '/var/lib/oozie', 'comment': 'Oozie User', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'oozie', 'home': '/var/lib/oozie', 'comment': 'Oozie User', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'phoenix', 'home': '/var/lib/phoenix', 'comment': 'Phoenix User'})
+ok: [10.0.1.207] => (item={'user': 'phoenix', 'home': '/var/lib/phoenix', 'comment': 'Phoenix User'})
+ok: [10.0.1.147] => (item={'user': 'phoenix', 'home': '/var/lib/phoenix', 'comment': 'Phoenix User'})
+ok: [10.0.1.246] => (item={'user': 'phoenix', 'home': '/var/lib/phoenix', 'comment': 'Phoenix User'})
+ok: [10.0.1.56] => (item={'user': 'ranger', 'home': '/var/lib/ranger', 'comment': 'Ranger', 'extra_groups': ['hadoop']})
+ok: [10.0.1.207] => (item={'user': 'ranger', 'home': '/var/lib/ranger', 'comment': 'Ranger', 'extra_groups': ['hadoop']})
+ok: [10.0.1.147] => (item={'user': 'ranger', 'home': '/var/lib/ranger', 'comment': 'Ranger', 'extra_groups': ['hadoop']})
+ok: [10.0.1.246] => (item={'user': 'ranger', 'home': '/var/lib/ranger', 'comment': 'Ranger', 'extra_groups': ['hadoop']})
+ok: [10.0.1.56] => (item={'user': 'rangerraz', 'home': '/var/lib/rangerraz', 'comment': 'Ranger Raz User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.207] => (item={'user': 'rangerraz', 'home': '/var/lib/rangerraz', 'comment': 'Ranger Raz User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.147] => (item={'user': 'rangerraz', 'home': '/var/lib/rangerraz', 'comment': 'Ranger Raz User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.246] => (item={'user': 'rangerraz', 'home': '/var/lib/rangerraz', 'comment': 'Ranger Raz User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.56] => (item={'user': 'rangertagsync', 'home': '/var/lib/rangertagsync', 'comment': 'Ranger Tagsync User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.207] => (item={'user': 'rangertagsync', 'home': '/var/lib/rangertagsync', 'comment': 'Ranger Tagsync User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.147] => (item={'user': 'rangertagsync', 'home': '/var/lib/rangertagsync', 'comment': 'Ranger Tagsync User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.246] => (item={'user': 'rangertagsync', 'home': '/var/lib/rangertagsync', 'comment': 'Ranger Tagsync User', 'extra_groups': ['ranger', 'hadoop']})
+ok: [10.0.1.56] => (item={'user': 'schemaregistry', 'home': '/var/lib/schemaregistry', 'comment': 'Schema Registry', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'schemaregistry', 'home': '/var/lib/schemaregistry', 'comment': 'Schema Registry', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'schemaregistry', 'home': '/var/lib/schemaregistry', 'comment': 'Schema Registry', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'schemaregistry', 'home': '/var/lib/schemaregistry', 'comment': 'Schema Registry', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'sentry', 'home': '/var/lib/sentry', 'comment': 'Sentry'})
+ok: [10.0.1.207] => (item={'user': 'sentry', 'home': '/var/lib/sentry', 'comment': 'Sentry'})
+ok: [10.0.1.147] => (item={'user': 'sentry', 'home': '/var/lib/sentry', 'comment': 'Sentry'})
+ok: [10.0.1.246] => (item={'user': 'sentry', 'home': '/var/lib/sentry', 'comment': 'Sentry'})
+ok: [10.0.1.56] => (item={'user': 'solr', 'home': '/var/lib/solr', 'comment': 'Solr', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'solr', 'home': '/var/lib/solr', 'comment': 'Solr', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'solr', 'home': '/var/lib/solr', 'comment': 'Solr', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'solr', 'home': '/var/lib/solr', 'comment': 'Solr', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'spark', 'home': '/var/lib/spark', 'comment': 'Spark', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'spark', 'home': '/var/lib/spark', 'comment': 'Spark', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'spark', 'home': '/var/lib/spark', 'comment': 'Spark', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'spark', 'home': '/var/lib/spark', 'comment': 'Spark', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'spark2', 'home': '/var/lib/spark2', 'comment': 'Spark2'})
+ok: [10.0.1.207] => (item={'user': 'spark2', 'home': '/var/lib/spark2', 'comment': 'Spark2'})
+ok: [10.0.1.147] => (item={'user': 'spark2', 'home': '/var/lib/spark2', 'comment': 'Spark2'})
+ok: [10.0.1.246] => (item={'user': 'spark2', 'home': '/var/lib/spark2', 'comment': 'Spark2'})
+ok: [10.0.1.56] => (item={'user': 'sqoop', 'home': '/var/lib/sqoop', 'comment': 'Sqoop'})
+ok: [10.0.1.207] => (item={'user': 'sqoop', 'home': '/var/lib/sqoop', 'comment': 'Sqoop'})
+ok: [10.0.1.147] => (item={'user': 'sqoop', 'home': '/var/lib/sqoop', 'comment': 'Sqoop'})
+ok: [10.0.1.246] => (item={'user': 'sqoop', 'home': '/var/lib/sqoop', 'comment': 'Sqoop'})
+ok: [10.0.1.56] => (item={'user': 'sqoop2', 'home': '/var/lib/sqoop2', 'comment': 'Sqoop2', 'extra_groups': ['sqoop']})
+ok: [10.0.1.207] => (item={'user': 'sqoop2', 'home': '/var/lib/sqoop2', 'comment': 'Sqoop2', 'extra_groups': ['sqoop']})
+ok: [10.0.1.147] => (item={'user': 'sqoop2', 'home': '/var/lib/sqoop2', 'comment': 'Sqoop2', 'extra_groups': ['sqoop']})
+ok: [10.0.1.246] => (item={'user': 'sqoop2', 'home': '/var/lib/sqoop2', 'comment': 'Sqoop2', 'extra_groups': ['sqoop']})
+ok: [10.0.1.56] => (item={'user': 'ssb', 'home': '/var/lib/ssb', 'comment': 'SSB'})
+ok: [10.0.1.207] => (item={'user': 'ssb', 'home': '/var/lib/ssb', 'comment': 'SSB'})
+ok: [10.0.1.147] => (item={'user': 'ssb', 'home': '/var/lib/ssb', 'comment': 'SSB'})
+ok: [10.0.1.246] => (item={'user': 'ssb', 'home': '/var/lib/ssb', 'comment': 'SSB'})
+ok: [10.0.1.56] => (item={'user': 'streamsmsgmgr', 'home': '/var/lib/streams_messaging_manager', 'comment': 'Streams Messaging Manager', 'keystore_acl': True, 'key_acl': True})
+ok: [10.0.1.207] => (item={'user': 'streamsmsgmgr', 'home': '/var/lib/streams_messaging_manager', 'comment': 'Streams Messaging Manager', 'keystore_acl': True, 'key_acl': True})
+ok: [10.0.1.147] => (item={'user': 'streamsmsgmgr', 'home': '/var/lib/streams_messaging_manager', 'comment': 'Streams Messaging Manager', 'keystore_acl': True, 'key_acl': True})
+ok: [10.0.1.246] => (item={'user': 'streamsmsgmgr', 'home': '/var/lib/streams_messaging_manager', 'comment': 'Streams Messaging Manager', 'keystore_acl': True, 'key_acl': True})
+ok: [10.0.1.56] => (item={'user': 'streamsrepmgr', 'home': '/var/lib/streams_replication_manager', 'comment': 'Streams Replication Manager', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'streamsrepmgr', 'home': '/var/lib/streams_replication_manager', 'comment': 'Streams Replication Manager', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'streamsrepmgr', 'home': '/var/lib/streams_replication_manager', 'comment': 'Streams Replication Manager', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'streamsrepmgr', 'home': '/var/lib/streams_replication_manager', 'comment': 'Streams Replication Manager', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'superset', 'home': '/var/lib/superset', 'comment': 'Superset'})
+ok: [10.0.1.207] => (item={'user': 'superset', 'home': '/var/lib/superset', 'comment': 'Superset'})
+ok: [10.0.1.147] => (item={'user': 'superset', 'home': '/var/lib/superset', 'comment': 'Superset'})
+ok: [10.0.1.246] => (item={'user': 'superset', 'home': '/var/lib/superset', 'comment': 'Superset'})
+ok: [10.0.1.56] => (item={'user': 'yarn', 'home': '/var/lib/hadoop-yarn', 'comment': 'Hadoop Yarn', 'extra_groups': ['hadoop', 'spark']})
+ok: [10.0.1.207] => (item={'user': 'yarn', 'home': '/var/lib/hadoop-yarn', 'comment': 'Hadoop Yarn', 'extra_groups': ['hadoop', 'spark']})
+ok: [10.0.1.147] => (item={'user': 'yarn', 'home': '/var/lib/hadoop-yarn', 'comment': 'Hadoop Yarn', 'extra_groups': ['hadoop', 'spark']})
+ok: [10.0.1.246] => (item={'user': 'yarn', 'home': '/var/lib/hadoop-yarn', 'comment': 'Hadoop Yarn', 'extra_groups': ['hadoop', 'spark']})
+ok: [10.0.1.56] => (item={'user': 'zeppelin', 'home': '/var/lib/zeppelin', 'comment': 'Zeppelin', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'zeppelin', 'home': '/var/lib/zeppelin', 'comment': 'Zeppelin', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'zeppelin', 'home': '/var/lib/zeppelin', 'comment': 'Zeppelin', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'zeppelin', 'home': '/var/lib/zeppelin', 'comment': 'Zeppelin', 'keystore_acl': True})
+ok: [10.0.1.56] => (item={'user': 'zookeeper', 'home': '/var/lib/zookeeper', 'comment': 'ZooKeeper', 'keystore_acl': True})
+ok: [10.0.1.207] => (item={'user': 'zookeeper', 'home': '/var/lib/zookeeper', 'comment': 'ZooKeeper', 'keystore_acl': True})
+ok: [10.0.1.147] => (item={'user': 'zookeeper', 'home': '/var/lib/zookeeper', 'comment': 'ZooKeeper', 'keystore_acl': True})
+ok: [10.0.1.246] => (item={'user': 'zookeeper', 'home': '/var/lib/zookeeper', 'comment': 'ZooKeeper', 'keystore_acl': True})
+
+TASK [prereqs/user_accounts : Workaround - Create symlink for SMM user's home directory (1/2)] ***
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/user_accounts : Workaround - Create symlink for SMM user's home directory (2/2)] ***
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+PLAY [Install JDK] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/jdk : Include variables] *****************************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/jdk : Include variables] *****************************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/jdk : Define JDK package] ****************************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/jdk : Install JDK] ***********************************************
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+ok: [10.0.1.207]
+
+TASK [prereqs/jdk : Find Java home directory] **********************************
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.207]
+ok: [10.0.1.147]
+
+TASK [prereqs/jdk : Create alternatives symlink for java] **********************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/jdk : Create symlinks for Java home directory] *******************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/jdk : Capture installed Java provider] ***************************
+changed: [10.0.1.56]
+changed: [10.0.1.207]
+changed: [10.0.1.147]
+changed: [10.0.1.246]
+
+TASK [prereqs/jdk : Capture installed Java version] ****************************
+changed: [10.0.1.207]
+changed: [10.0.1.56]
+changed: [10.0.1.246]
+changed: [10.0.1.147]
+
+TASK [prereqs/jdk : set_fact] **************************************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/jdk : fail] ******************************************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/jdk : Find java.security file] ***********************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/jdk : fail] ******************************************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/jdk : Enable Unlimited Strength Policy] **************************
+skipping: [10.0.1.207] => (item={'path': '/usr/lib/jvm/jre/conf/security/java.security', 'mode': '0644', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 57573, 'inode': 52429119, 'dev': 66306, 'nlink': 1, 'atime': 1680548324.1674716, 'mtime': 1680545796.1161916, 'ctime': 1680545796.1181915, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': False, 'wgrp': False, 'rgrp': True, 'xgrp': False, 'woth': False, 'roth': True, 'xoth': False, 'isuid': False, 'isgid': False}) 
+skipping: [10.0.1.56] => (item={'path': '/usr/lib/jvm/jre/conf/security/java.security', 'mode': '0644', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 57573, 'inode': 337641690, 'dev': 66306, 'nlink': 1, 'atime': 1680545228.0469482, 'mtime': 1680529905.6975088, 'ctime': 1680529905.7005088, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': False, 'wgrp': False, 'rgrp': True, 'xgrp': False, 'woth': False, 'roth': True, 'xoth': False, 'isuid': False, 'isgid': False}) 
+skipping: [10.0.1.246] => (item={'path': '/usr/lib/jvm/jre/conf/security/java.security', 'mode': '0644', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 57573, 'inode': 337641690, 'dev': 66306, 'nlink': 1, 'atime': 1680545228.3553672, 'mtime': 1680529905.9100814, 'ctime': 1680529905.9110813, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': False, 'wgrp': False, 'rgrp': True, 'xgrp': False, 'woth': False, 'roth': True, 'xoth': False, 'isuid': False, 'isgid': False}) 
+skipping: [10.0.1.147] => (item={'path': '/usr/lib/jvm/jre/conf/security/java.security', 'mode': '0644', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 57573, 'inode': 337641690, 'dev': 66306, 'nlink': 1, 'atime': 1680545228.7627428, 'mtime': 1680529906.4976614, 'ctime': 1680529906.4996614, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': False, 'wgrp': False, 'rgrp': True, 'xgrp': False, 'woth': False, 'roth': True, 'xoth': False, 'isuid': False, 'isgid': False}) 
+
+TASK [prereqs/jdk : Apply workaround for Kerberos issues introduced in OpenJDK 1.8u242 and 11.0.6 (JDK-8215032)] ***
+ok: [10.0.1.207] => (item={'path': '/usr/lib/jvm/jre/conf/security/java.security', 'mode': '0644', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 57573, 'inode': 52429119, 'dev': 66306, 'nlink': 1, 'atime': 1680548324.1674716, 'mtime': 1680545796.1161916, 'ctime': 1680545796.1181915, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': False, 'wgrp': False, 'rgrp': True, 'xgrp': False, 'woth': False, 'roth': True, 'xoth': False, 'isuid': False, 'isgid': False})
+ok: [10.0.1.56] => (item={'path': '/usr/lib/jvm/jre/conf/security/java.security', 'mode': '0644', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 57573, 'inode': 337641690, 'dev': 66306, 'nlink': 1, 'atime': 1680545228.0469482, 'mtime': 1680529905.6975088, 'ctime': 1680529905.7005088, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': False, 'wgrp': False, 'rgrp': True, 'xgrp': False, 'woth': False, 'roth': True, 'xoth': False, 'isuid': False, 'isgid': False})
+ok: [10.0.1.246] => (item={'path': '/usr/lib/jvm/jre/conf/security/java.security', 'mode': '0644', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 57573, 'inode': 337641690, 'dev': 66306, 'nlink': 1, 'atime': 1680545228.3553672, 'mtime': 1680529905.9100814, 'ctime': 1680529905.9110813, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': False, 'wgrp': False, 'rgrp': True, 'xgrp': False, 'woth': False, 'roth': True, 'xoth': False, 'isuid': False, 'isgid': False})
+ok: [10.0.1.147] => (item={'path': '/usr/lib/jvm/jre/conf/security/java.security', 'mode': '0644', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 0, 'gid': 0, 'size': 57573, 'inode': 337641690, 'dev': 66306, 'nlink': 1, 'atime': 1680545228.7627428, 'mtime': 1680529906.4976614, 'ctime': 1680529906.4996614, 'gr_name': 'root', 'pw_name': 'root', 'wusr': True, 'rusr': True, 'xusr': False, 'wgrp': False, 'rgrp': True, 'xgrp': False, 'woth': False, 'roth': True, 'xoth': False, 'isuid': False, 'isgid': False})
+
+PLAY [Install Python 3 if needed] **********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/python3 : Include variables] *************************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/python3 : set_fact] **********************************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/python3 : Install python 3] **************************************
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+ok: [10.0.1.207]
+
+TASK [prereqs/python3 : Install pip3] ******************************************
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+ok: [10.0.1.207]
+
+TASK [prereqs/python3 : Install Required packages for Python 3.8 installation] ***
+skipping: [10.0.1.207] => (item=gcc) 
+skipping: [10.0.1.207] => (item=bzip2-devel) 
+skipping: [10.0.1.207] => (item=libffi-devel) 
+skipping: [10.0.1.207] => (item=zlib-devel) 
+skipping: [10.0.1.56] => (item=gcc) 
+skipping: [10.0.1.56] => (item=bzip2-devel) 
+skipping: [10.0.1.56] => (item=libffi-devel) 
+skipping: [10.0.1.56] => (item=zlib-devel) 
+skipping: [10.0.1.246] => (item=gcc) 
+skipping: [10.0.1.246] => (item=bzip2-devel) 
+skipping: [10.0.1.246] => (item=libffi-devel) 
+skipping: [10.0.1.246] => (item=zlib-devel) 
+skipping: [10.0.1.147] => (item=gcc) 
+skipping: [10.0.1.147] => (item=bzip2-devel) 
+skipping: [10.0.1.147] => (item=libffi-devel) 
+skipping: [10.0.1.147] => (item=zlib-devel) 
+
+TASK [prereqs/python3 : Install openssl package (can fail)] ********************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/python3 : Download Openssl package for Suse distribution] ********
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/python3 : Unarchive Openssl tar.gz for Suse distribution] ********
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/python3 : Configure & Install Openssl for Suse distribution] *****
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/python3 : Copy openssl compiled lib files for Suse distribution] ***
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/python3 : Delete openssl tar gz for Suse distribution] ***********
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/python3 : Download Python 3.8 package] ***************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/python3 : Unarchive Python tar.gz] *******************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/python3 : Configure & Install Python 3.8] ************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/python3 : Copy python lib files] *********************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/python3 : Delete openssl compiled lib files for Suse distribution] ***
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/python3 : Add OS extra repos] ************************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/python3 : Install Required packages for Psycopg2 with Python 3.8] ***
+skipping: [10.0.1.207] => (item=xmlsec1) 
+skipping: [10.0.1.207] => (item=xmlsec1-openssl) 
+skipping: [10.0.1.207] => (item=postgresql10-devel) 
+skipping: [10.0.1.207] => (item=https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm) 
+skipping: [10.0.1.56] => (item=xmlsec1) 
+skipping: [10.0.1.56] => (item=xmlsec1-openssl) 
+skipping: [10.0.1.56] => (item=postgresql10-devel) 
+skipping: [10.0.1.56] => (item=https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm) 
+skipping: [10.0.1.246] => (item=xmlsec1) 
+skipping: [10.0.1.246] => (item=xmlsec1-openssl) 
+skipping: [10.0.1.246] => (item=postgresql10-devel) 
+skipping: [10.0.1.246] => (item=https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm) 
+skipping: [10.0.1.147] => (item=xmlsec1) 
+skipping: [10.0.1.147] => (item=xmlsec1-openssl) 
+skipping: [10.0.1.147] => (item=postgresql10-devel) 
+skipping: [10.0.1.147] => (item=https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm) 
+
+TASK [prereqs/python3 : Install psycopg2 2.9.3] ********************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+PLAY RECAP *********************************************************************
+10.0.1.147                 : ok=45   changed=7    unreachable=0    failed=0    skipped=25   rescued=0    ignored=0   
+10.0.1.207                 : ok=46   changed=7    unreachable=0    failed=0    skipped=25   rescued=0    ignored=0   
+10.0.1.246                 : ok=45   changed=7    unreachable=0    failed=0    skipped=25   rescued=0    ignored=0   
+10.0.1.56                  : ok=45   changed=7    unreachable=0    failed=0    skipped=25   rescued=0    ignored=0   
+
+
+PLAY [Install custom parcel repository] ****************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [10.0.1.207]
+
+TASK [infrastructure/custom_repo : Include variables] **************************
+ok: [10.0.1.207]
+
+TASK [infrastructure/custom_repo : Install httpd] ******************************
+ok: [10.0.1.207]
+
+TASK [infrastructure/custom_repo : Populate parcel repository contents] ********
+
+TASK [infrastructure/custom_repo : Start and enable httpd] *********************
+changed: [10.0.1.207]
+
+PLAY [Install RDBMS] ***********************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [10.0.1.207]
+
+TASK [infrastructure/rdbms : Include database type specific variables] *********
+ok: [10.0.1.207]
+
+TASK [infrastructure/rdbms : Include database type and OS specific variables] ***
+ok: [10.0.1.207] => (item=/home/ec2-user/deployment/ansible-repo/roles/infrastructure/rdbms/vars/postgresql-RedHat-8.yml)
+
+TASK [infrastructure/rdbms : disable default Postgres module in Rhel 8] ********
+ok: [10.0.1.207]
+
+TASK [infrastructure/rdbms : Install database] *********************************
+included: /home/ec2-user/deployment/ansible-repo/roles/infrastructure/rdbms/tasks/postgresql-RedHat.yml for 10.0.1.207
+
+TASK [infrastructure/rdbms : Install PostgreSQL common repository] *************
+changed: [10.0.1.207]
+
+TASK [infrastructure/rdbms : Install PostgreSQL version repository] ************
+changed: [10.0.1.207]
+
+TASK [Install PostgreSQL] ******************************************************
+
+TASK [geerlingguy.postgresql : include_tasks] **********************************
+included: /home/ec2-user/.ansible/roles/geerlingguy.postgresql/tasks/variables.yml for 10.0.1.207
+
+TASK [geerlingguy.postgresql : Include OS-specific variables (Debian).] ********
+skipping: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : Include OS-specific variables (RedHat).] ********
+ok: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : Include OS-specific variables (Fedora).] ********
+skipping: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : Define postgresql_packages.] ********************
+skipping: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : Define postgresql_version.] *********************
+skipping: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : Define postgresql_daemon.] **********************
+skipping: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : Define postgresql_data_dir.] ********************
+skipping: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : Define postgresql_bin_path.] ********************
+skipping: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : Define postgresql_config_path.] *****************
+skipping: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : Define postgresql_unix_socket_directories_mode.] ***
+ok: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : include_tasks] **********************************
+included: /home/ec2-user/.ansible/roles/geerlingguy.postgresql/tasks/setup-RedHat.yml for 10.0.1.207
+
+TASK [geerlingguy.postgresql : Ensure PostgreSQL packages are installed.] ******
+ok: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : Ensure PostgreSQL Python libraries are installed.] ***
+ok: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : include_tasks] **********************************
+skipping: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : include_tasks] **********************************
+included: /home/ec2-user/.ansible/roles/geerlingguy.postgresql/tasks/initialize.yml for 10.0.1.207
+
+TASK [geerlingguy.postgresql : Set PostgreSQL environment variables.] **********
+ok: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : Ensure PostgreSQL data directory exists.] *******
+ok: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : Check if PostgreSQL database is initialized.] ***
+ok: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : Ensure PostgreSQL database is initialized.] *****
+skipping: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : include_tasks] **********************************
+included: /home/ec2-user/.ansible/roles/geerlingguy.postgresql/tasks/configure.yml for 10.0.1.207
+
+TASK [geerlingguy.postgresql : Configure global settings.] *********************
+ok: [10.0.1.207] => (item={'option': 'listen_addresses', 'value': '*'})
+ok: [10.0.1.207] => (item={'option': 'max_connections', 'value': 1000})
+
+TASK [geerlingguy.postgresql : Configure host based authentication (if entries are configured).] ***
+ok: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : Ensure PostgreSQL unix socket dirs exist.] ******
+ok: [10.0.1.207] => (item=/var/run/postgresql)
+
+TASK [geerlingguy.postgresql : Ensure PostgreSQL is started and enabled on boot.] ***
+ok: [10.0.1.207]
+
+TASK [geerlingguy.postgresql : Ensure PostgreSQL users are present.] ***********
+
+TASK [geerlingguy.postgresql : Ensure PostgreSQL databases are present.] *******
+
+TASK [infrastructure/rdbms : Fix UTF-8 template] *******************************
+included: /home/ec2-user/deployment/ansible-repo/roles/infrastructure/rdbms/tasks/template_fix.yml for 10.0.1.207
+
+TASK [infrastructure/rdbms : Copy SQL to change template to UTF-8] *************
+changed: [10.0.1.207]
+
+TASK [infrastructure/rdbms : Run SQL to change template to UTF-8] **************
+changed: [10.0.1.207]
+
+TASK [infrastructure/rdbms : Remove SQL file] **********************************
+changed: [10.0.1.207]
+
+TASK [infrastructure/rdbms : Remove repositories and clean metadata] ***********
+changed: [10.0.1.207] => (item=pgdg-common)
+changed: [10.0.1.207] => (item=pgdg)
+
+RUNNING HANDLER [infrastructure/rdbms : yum clean metadata] ********************
+changed: [10.0.1.207]
+
+PLAY [Install MIT KDC] *********************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [10.0.1.207]
+
+TASK [infrastructure/krb5_client : Include variables] **************************
+ok: [10.0.1.207]
+
+TASK [infrastructure/krb5_client : Install KRB5 client libraries] **************
+ok: [10.0.1.207]
+
+TASK [infrastructure/krb5_client : Create krb5.conf] ***************************
+ok: [10.0.1.207]
+
+TASK [infrastructure/krb5_server : Include variables] **************************
+ok: [10.0.1.207]
+
+TASK [infrastructure/krb5_server : Install KRB5 server] ************************
+ok: [10.0.1.207]
+
+TASK [infrastructure/krb5_server : Set kdc.conf] *******************************
+ok: [10.0.1.207]
+
+TASK [infrastructure/krb5_server : Create KDC database] ************************
+ok: [10.0.1.207]
+
+TASK [infrastructure/krb5_server : Set kadm5.acl] ******************************
+ok: [10.0.1.207]
+
+TASK [infrastructure/krb5_server : Create Cloudera Manager admin principal] ****
+changed: [10.0.1.207]
+
+TASK [infrastructure/krb5_server : Start Kerberos KDC] *************************
+changed: [10.0.1.207] => (item=krb5kdc)
+changed: [10.0.1.207] => (item=kadmin)
+
+PLAY [Install CA server] *******************************************************
+skipping: no hosts matched
+
+PLAY [Install HAProxy] *********************************************************
+skipping: no hosts matched
+
+PLAY [Install MySQL Connector] *************************************************
+
+TASK [prereqs/mysql_connector : Download MySQL Connector/J] ********************
+skipping: [10.0.1.207]
+
+TASK [prereqs/mysql_connector : Create /usr/share/java directory] **************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/mysql_connector : Install unzip package] *************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/mysql_connector : Extract MySQL Connector/J zip file] ************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/mysql_connector : Copy MySQL Connector/J jar file to correct location] ***
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/mysql_fix_rhel8 : Remove mariadb packages if needed] *************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/mysql_fix_rhel8 : Install mysql-devel package] *******************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/mysql_fix_rhel8 : Send my_config.h for RHEL 8] *******************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/mysql_fix_rhel8 : Install Mysql packages for python] *************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/mysql_fix_rhel8 : Chmod on mysql python files] *******************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+PLAY [Install Oracle Connector] ************************************************
+
+TASK [prereqs/oracle_connector : Download Oracle Connector] ********************
+skipping: [10.0.1.207]
+
+TASK [prereqs/oracle_connector : Create /usr/share/java directory] *************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/oracle_connector : Copy Oracle Connector jar file to correct location] ***
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/oracle_connector : Ensure directory for the instantclient] *******
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/oracle_connector : Ensure unzip is available] ********************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/oracle_connector : Unarchive basic instantclient] ****************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/oracle_connector : Unarchive sdk instantclient] ******************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/oracle_connector : Install the libaio package] *******************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+PLAY [Install Postgres Connector] **********************************************
+
+TASK [prereqs/psql_connector : Create /usr/share/java directory] ***************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/psql_connector : Download postgresql Connector] ******************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/psql_connector : Create python3-psycopg2 directory] **************
+ok: [10.0.1.56]
+ok: [10.0.1.207]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/psql_connector : Install python3-psycopg2] ***********************
+changed: [10.0.1.207]
+changed: [10.0.1.56]
+changed: [10.0.1.147]
+changed: [10.0.1.246]
+
+PLAY RECAP *********************************************************************
+10.0.1.147                 : ok=4    changed=1    unreachable=0    failed=0    skipped=16   rescued=0    ignored=0   
+10.0.1.207                 : ok=47   changed=11   unreachable=0    failed=0    skipped=31   rescued=0    ignored=0   
+10.0.1.246                 : ok=4    changed=1    unreachable=0    failed=0    skipped=16   rescued=0    ignored=0   
+10.0.1.56                  : ok=4    changed=1    unreachable=0    failed=0    skipped=16   rescued=0    ignored=0   
+
+
+PLAY [Group hosts using host template information] *****************************
+
+TASK [Group by host template] **************************************************
+changed: [10.0.1.207]
+changed: [10.0.1.56]
+changed: [10.0.1.246]
+changed: [10.0.1.147]
+
+TASK [Initial pass of cluster definition] **************************************
+ok: [10.0.1.207]
+
+TASK [Find the correct host template] ******************************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [Group by service] ********************************************************
+ok: [10.0.1.207] => (item=HDFS)
+ok: [10.0.1.56] => (item=HDFS)
+ok: [10.0.1.207] => (item=ZOOKEEPER)
+ok: [10.0.1.56] => (item=RANGER)
+ok: [10.0.1.246] => (item=HDFS)
+ok: [10.0.1.246] => (item=ZOOKEEPER)
+ok: [10.0.1.56] => (item=ZOOKEEPER)
+ok: [10.0.1.147] => (item=HDFS)
+ok: [10.0.1.56] => (item=INFRA_SOLR)
+ok: [10.0.1.147] => (item=ZOOKEEPER)
+
+TASK [Group by service role] ***************************************************
+ok: [10.0.1.207] => (item=HDFS_JOURNALNODE)
+ok: [10.0.1.56] => (item=HDFS_NAMENODE)
+ok: [10.0.1.207] => (item=HDFS_GATEWAY)
+ok: [10.0.1.246] => (item=HDFS_DATANODE)
+ok: [10.0.1.207] => (item=ZOOKEEPER_SERVER)
+ok: [10.0.1.56] => (item=HDFS_JOURNALNODE)
+ok: [10.0.1.246] => (item=HDFS_GATEWAY)
+ok: [10.0.1.56] => (item=HDFS_FAILOVERCONTROLLER)
+ok: [10.0.1.147] => (item=HDFS_DATANODE)
+ok: [10.0.1.246] => (item=ZOOKEEPER_SERVER)
+ok: [10.0.1.56] => (item=HDFS_GATEWAY)
+ok: [10.0.1.147] => (item=HDFS_GATEWAY)
+ok: [10.0.1.56] => (item=RANGER_RANGER_TAGSYNC)
+ok: [10.0.1.147] => (item=ZOOKEEPER_SERVER)
+ok: [10.0.1.56] => (item=RANGER_RANGER_USERSYNC)
+ok: [10.0.1.56] => (item=ZOOKEEPER_SERVER)
+ok: [10.0.1.56] => (item=INFRA_SOLR_SOLR_SERVER)
+
+TASK [(debug) Show derived groups] *********************************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+PLAY [Verify definition [verify_parcels]] **************************************
+
+TASK [deployment/definition : Load cluster definition] *************************
+ok: [localhost]
+
+TASK [deployment/definition : set_fact] ****************************************
+ok: [localhost]
+
+TASK [deployment/definition : set_fact] ****************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure cluster services and roles are valid] ***
+included: /home/ec2-user/deployment/ansible-repo/roles/verify/parcels_and_roles/tasks/check_cluster.yml for localhost
+
+TASK [Retrieve repository metadata] ********************************************
+
+TASK [deployment/repometa : Set products and parcel repositories] **************
+included: /home/ec2-user/deployment/ansible-repo/roles/deployment/repometa/tasks/parcels.yml for localhost
+
+TASK [deployment/repometa : Download parcel manifest information] **************
+ok: [localhost] => (item=https://archive.cloudera.com/cdh7/7.1.7.0/parcels/)
+
+TASK [deployment/repometa : DEBUG - manifests answer] **************************
+skipping: [localhost]
+
+TASK [deployment/repometa : Extract product details from parcel manifests] *****
+ok: [localhost]
+
+TASK [deployment/repometa : Extract runtime version from products list] ********
+ok: [localhost]
+
+TASK [deployment/repometa : Load service to role mappings] *********************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure services are specified] ****************
+ok: [localhost] => {
+    "changed": false,
+    "msg": "Services have been specified on the cluster"
+}
+
+TASK [verify/parcels_and_roles : Ensure host templates are specified] **********
+ok: [localhost] => {
+    "changed": false,
+    "msg": "Host templates have been specified on the cluster"
+}
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure that all the services are valid] *******
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All services in cluster are valid"
+}
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure that all the services are included in host templates] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All services in cluster are included in host templates"
+}
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure all configured services are valid] *****
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All services in cluster configuration are valid"
+}
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure all configured services are added to the cluster] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All services in cluster configuration have been correctly added to cluster service list"
+}
+
+TASK [verify/parcels_and_roles : Ensure all configured roles are valid] ********
+included: /home/ec2-user/deployment/ansible-repo/roles/verify/parcels_and_roles/tasks/check_cluster_config_roles.yml for localhost
+included: /home/ec2-user/deployment/ansible-repo/roles/verify/parcels_and_roles/tasks/check_cluster_config_roles.yml for localhost
+included: /home/ec2-user/deployment/ansible-repo/roles/verify/parcels_and_roles/tasks/check_cluster_config_roles.yml for localhost
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure all configured roles are valid] ********
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All roles defined in configuration block for 'HDFS' in cluster 'ofer-test' are valid"
+}
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure all configured roles are valid] ********
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All roles defined in configuration block for 'RANGER' in cluster 'ofer-test' are valid"
+}
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure all configured roles are valid] ********
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All roles defined in configuration block for 'ZOOKEEPER' in cluster 'ofer-test' are valid"
+}
+
+TASK [verify/parcels_and_roles : Ensure host templates have valid services and roles] ***
+included: /home/ec2-user/deployment/ansible-repo/roles/verify/parcels_and_roles/tasks/check_template.yml for localhost
+included: /home/ec2-user/deployment/ansible-repo/roles/verify/parcels_and_roles/tasks/check_template.yml for localhost
+included: /home/ec2-user/deployment/ansible-repo/roles/verify/parcels_and_roles/tasks/check_template.yml for localhost
+
+TASK [verify/parcels_and_roles : Host template being checked] ******************
+skipping: [localhost]
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure the host template services are valid] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All services defined in host template 'Edge' are valid"
+}
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure the host template services are also defined in cluster] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All services defined in host template 'Edge' are valid"
+}
+
+TASK [verify/parcels_and_roles : Ensure the host template service roles are valid] ***
+included: /home/ec2-user/deployment/ansible-repo/roles/verify/parcels_and_roles/tasks/check_template_roles.yml for localhost
+included: /home/ec2-user/deployment/ansible-repo/roles/verify/parcels_and_roles/tasks/check_template_roles.yml for localhost
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure the host template service roles are valid] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All roles defined in host template 'Edge' for service 'HDFS' are valid"
+}
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure the host template service roles are valid] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All roles defined in host template 'Edge' for service 'ZOOKEEPER' are valid"
+}
+
+TASK [verify/parcels_and_roles : Host template being checked] ******************
+skipping: [localhost]
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure the host template services are valid] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All services defined in host template 'Master1' are valid"
+}
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure the host template services are also defined in cluster] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All services defined in host template 'Master1' are valid"
+}
+
+TASK [verify/parcels_and_roles : Ensure the host template service roles are valid] ***
+included: /home/ec2-user/deployment/ansible-repo/roles/verify/parcels_and_roles/tasks/check_template_roles.yml for localhost
+included: /home/ec2-user/deployment/ansible-repo/roles/verify/parcels_and_roles/tasks/check_template_roles.yml for localhost
+included: /home/ec2-user/deployment/ansible-repo/roles/verify/parcels_and_roles/tasks/check_template_roles.yml for localhost
+included: /home/ec2-user/deployment/ansible-repo/roles/verify/parcels_and_roles/tasks/check_template_roles.yml for localhost
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure the host template service roles are valid] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All roles defined in host template 'Master1' for service 'HDFS' are valid"
+}
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure the host template service roles are valid] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All roles defined in host template 'Master1' for service 'RANGER' are valid"
+}
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure the host template service roles are valid] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All roles defined in host template 'Master1' for service 'ZOOKEEPER' are valid"
+}
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure the host template service roles are valid] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All roles defined in host template 'Master1' for service 'INFRA_SOLR' are valid"
+}
+
+TASK [verify/parcels_and_roles : Host template being checked] ******************
+skipping: [localhost]
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure the host template services are valid] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All services defined in host template 'Workers' are valid"
+}
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure the host template services are also defined in cluster] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All services defined in host template 'Workers' are valid"
+}
+
+TASK [verify/parcels_and_roles : Ensure the host template service roles are valid] ***
+included: /home/ec2-user/deployment/ansible-repo/roles/verify/parcels_and_roles/tasks/check_template_roles.yml for localhost
+included: /home/ec2-user/deployment/ansible-repo/roles/verify/parcels_and_roles/tasks/check_template_roles.yml for localhost
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure the host template service roles are valid] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All roles defined in host template 'Workers' for service 'HDFS' are valid"
+}
+
+TASK [verify/parcels_and_roles : set_fact] *************************************
+ok: [localhost]
+
+TASK [verify/parcels_and_roles : Ensure the host template service roles are valid] ***
+ok: [localhost] => {
+    "changed": false,
+    "msg": "All roles defined in host template 'Workers' for service 'ZOOKEEPER' are valid"
+}
+
+PLAY RECAP *********************************************************************
+10.0.1.147                 : ok=4    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+10.0.1.207                 : ok=5    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+10.0.1.246                 : ok=4    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+10.0.1.56                  : ok=4    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+localhost                  : ok=68   changed=0    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+
+
+PLAY [Install Cloudera Manager daemons] ****************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [10.0.1.56]
+ok: [10.0.1.207]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [cloudera_manager/repo : Include variables] *******************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [cloudera_manager/repo : Include variables] *******************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [cloudera_manager/repo : Define Cloudera Manager trial repository details] ***
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [cloudera_manager/repo : Define Cloudera Manager paywall repository details] ***
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [cloudera_manager/repo : Define Cloudera Manager repository key URL] ******
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [cloudera_manager/repo : Install Cloudera Manager repository] *************
+included: /home/ec2-user/deployment/ansible-repo/roles/cloudera_manager/repo/tasks/main-RedHat.yml for 10.0.1.207, 10.0.1.56, 10.0.1.246, 10.0.1.147
+
+TASK [cloudera_manager/repo : Add Cloudera Manager yum repository] *************
+changed: [10.0.1.207]
+changed: [10.0.1.147]
+changed: [10.0.1.56]
+changed: [10.0.1.246]
+
+TASK [cloudera_manager/daemons : Install Cloudera Manager daemons package] *****
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+ok: [10.0.1.207]
+
+PLAY [Install Cloudera Manager agents] *****************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [10.0.1.56]
+ok: [10.0.1.207]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [cloudera_manager/repo : Include variables] *******************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [cloudera_manager/repo : Include variables] *******************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [cloudera_manager/repo : Define Cloudera Manager trial repository details] ***
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [cloudera_manager/repo : Define Cloudera Manager paywall repository details] ***
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [cloudera_manager/repo : Define Cloudera Manager repository key URL] ******
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [cloudera_manager/repo : Install Cloudera Manager repository] *************
+included: /home/ec2-user/deployment/ansible-repo/roles/cloudera_manager/repo/tasks/main-RedHat.yml for 10.0.1.207, 10.0.1.56, 10.0.1.246, 10.0.1.147
+
+TASK [cloudera_manager/repo : Add Cloudera Manager yum repository] *************
+ok: [10.0.1.56]
+ok: [10.0.1.207]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [cloudera_manager/agent : Install Cloudera Manager agent packages] ********
+changed: [10.0.1.207]
+changed: [10.0.1.56]
+changed: [10.0.1.147]
+changed: [10.0.1.246]
+
+PLAY [Install Cloudera Manager server] *****************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/repo : Include variables] *******************************
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/repo : Include variables] *******************************
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/repo : Define Cloudera Manager trial repository details] ***
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/repo : Define Cloudera Manager paywall repository details] ***
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/repo : Define Cloudera Manager repository key URL] ******
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/repo : Install Cloudera Manager repository] *************
+included: /home/ec2-user/deployment/ansible-repo/roles/cloudera_manager/repo/tasks/main-RedHat.yml for 10.0.1.207
+
+TASK [cloudera_manager/repo : Add Cloudera Manager yum repository] *************
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/server : Install Cloudera Manager Server] ***************
+changed: [10.0.1.207]
+
+TASK [cloudera_manager/server : Customize CMF_SERVER_ARGS] *********************
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/server : Customize CMF_JAVA_OPTS] ***********************
+skipping: [10.0.1.207]
+
+TASK [deployment/definition : Load cluster definition] *************************
+ok: [10.0.1.207]
+
+TASK [deployment/definition : set_fact] ****************************************
+ok: [10.0.1.207]
+
+TASK [deployment/definition : set_fact] ****************************************
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/database : Configure Cloudera Manager database (external)] ***
+included: /home/ec2-user/deployment/ansible-repo/roles/cloudera_manager/database/tasks/external.yml for 10.0.1.207
+
+TASK [cloudera_manager/database : Create Cloudera Manager database user] *******
+changed: [10.0.1.207 -> 10.0.1.207]
+
+TASK [cloudera_manager/database : Create Cloudera Manager database] ************
+changed: [10.0.1.207 -> 10.0.1.207]
+
+TASK [cloudera_manager/database : Create Cloudera Manager database user] *******
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/database : Create Cloudera Manager database] ************
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/database : Prepare Cloudera Manager Server external database] ***
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/database : Configure Cloudera Manager database (embedded)] ***
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/csds : Create CSD directory] ****************************
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/csds : Download CSDs] ***********************************
+
+TASK [cloudera_manager/server : Start Cloudera Manager Server] *****************
+changed: [10.0.1.207]
+
+RUNNING HANDLER [cloudera_manager/common : wait cloudera-scm-server] ***********
+ok: [10.0.1.207]
+
+PLAY [Apply Cloudera Manager license] ******************************************
+
+TASK [cloudera_manager/admin_password/check : Check the default Cloudera Manager admin password] ***
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/admin_password/check : set_fact] ************************
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/admin_password/check : Set the playbook to use the non-default Cloudera Manager admin password] ***
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/api_client : set_fact] **********************************
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/license : Upload enterprise license] ********************
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/license : Begin trial license] **************************
+included: /home/ec2-user/deployment/ansible-repo/roles/cloudera_manager/license/tasks/trial.yml for 10.0.1.207
+
+TASK [cloudera_manager/license : Begin Cloudera Manager trial license] *********
+ok: [10.0.1.207]
+
+PLAY [Configure Cloudera Manager server for TLS] *******************************
+
+TASK [cloudera_manager/admin_password/check : Check the default Cloudera Manager admin password] ***
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/admin_password/check : set_fact] ************************
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/admin_password/check : Set the playbook to use the non-default Cloudera Manager admin password] ***
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/api_client : set_fact] **********************************
+skipping: [10.0.1.207]
+
+TASK [Set Cloudera Manager TLS configs] ****************************************
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/server_tls : fail] **************************************
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/server_tls : Customize CMF_JAVA_OPTS] *******************
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/server_tls : Restart Cloudera Manager Server] ***********
+skipping: [10.0.1.207]
+
+PLAY [Configure Cloudera Manager agents] ***************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [cloudera_manager/agent_config : Set Cloudera Manager agent 'server_host' in config.ini] ***
+changed: [10.0.1.56]
+changed: [10.0.1.246]
+changed: [10.0.1.207]
+changed: [10.0.1.147]
+
+TASK [cloudera_manager/agent_config : Set use_tls in config.ini] ***************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [cloudera_manager/agent_config : Set verify_cert_file in config.ini] ******
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [cloudera_manager/agent_config : Set client_key_file in config.ini] *******
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [cloudera_manager/agent_config : Set client_keypw_file in config.ini] *****
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [cloudera_manager/agent_config : Set client_cert_file in config.ini] ******
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [cloudera_manager/agent_config : Copy Python lib files for Hue with Python 3.8] ***
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+RUNNING HANDLER [cloudera_manager/common : restart cloudera-scm-agent] *********
+changed: [10.0.1.56]
+changed: [10.0.1.207]
+changed: [10.0.1.246]
+changed: [10.0.1.147]
+
+TASK [cloudera_manager/agent_config : Ensure Cloudera Manager agent is started] ***
+ok: [10.0.1.56]
+ok: [10.0.1.207]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+PLAY [Configure Cloudera Manager server] ***************************************
+
+TASK [cloudera_manager/admin_password/check : Check the default Cloudera Manager admin password] ***
+skipping: [localhost]
+
+TASK [cloudera_manager/admin_password/check : set_fact] ************************
+ok: [localhost]
+
+TASK [cloudera_manager/admin_password/check : Set the playbook to use the non-default Cloudera Manager admin password] ***
+skipping: [localhost]
+
+TASK [cloudera_manager/api_client : set_fact] **********************************
+ok: [localhost]
+
+TASK [cloudera_manager/config : Get existing configs] **************************
+ok: [localhost]
+
+TASK [cloudera_manager/config : Filter out null configs if necessary] **********
+ok: [localhost]
+
+TASK [cloudera_manager/config : Update configuration endpoint to contain change message] ***
+ok: [localhost]
+
+TASK [cloudera_manager/config : Update configuration (via Cloudera Manager API)] ***
+ok: [localhost]
+
+PLAY [Configure Cloudera Manager external auth] ********************************
+
+TASK [cloudera_manager/admin_password/check : Check the default Cloudera Manager admin password] ***
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/admin_password/check : set_fact] ************************
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/admin_password/check : Set the playbook to use the non-default Cloudera Manager admin password] ***
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/api_client : set_fact] **********************************
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/external_auth : Select external auth provider details] ***
+ok: [10.0.1.207]
+
+TASK [Set Cloudera Manager external auth configs] ******************************
+
+TASK [cloudera_manager/api_client : set_fact] **********************************
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/config : Get existing configs] **************************
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/config : Filter out null configs if necessary] **********
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/config : Update configuration endpoint to contain change message] ***
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/config : Update configuration (via Cloudera Manager API)] ***
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/external_auth : Get auth roles from Cloudera Manager] ***
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/external_auth : Create auth role name to UUID mapping] ***
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/external_auth : Set Cloudera Manager external auth user to role mappings] ***
+included: /home/ec2-user/deployment/ansible-repo/roles/cloudera_manager/external_auth/tasks/create_mapping.yml for 10.0.1.207
+included: /home/ec2-user/deployment/ansible-repo/roles/cloudera_manager/external_auth/tasks/create_mapping.yml for 10.0.1.207
+included: /home/ec2-user/deployment/ansible-repo/roles/cloudera_manager/external_auth/tasks/create_mapping.yml for 10.0.1.207
+
+TASK [cloudera_manager/external_auth : Create Cloudera Manager external auth user to role mapping] ***
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/external_auth : Create Cloudera Manager external auth user to role mapping] ***
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/external_auth : Create Cloudera Manager external auth user to role mapping] ***
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/external_auth : Restart Cloudera Manager server] ********
+changed: [10.0.1.207]
+
+RUNNING HANDLER [cloudera_manager/common : wait cloudera-scm-server] ***********
+ok: [10.0.1.207]
+
+PLAY [Configure Cloudera Manager external accounts] ****************************
+
+TASK [cloudera_manager/admin_password/check : Check the default Cloudera Manager admin password] ***
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/admin_password/check : set_fact] ************************
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/admin_password/check : Set the playbook to use the non-default Cloudera Manager admin password] ***
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/api_client : set_fact] **********************************
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/external_account : Create Cloudera Manager external accounts] ***
+
+PLAY RECAP *********************************************************************
+10.0.1.147                 : ok=15   changed=4    unreachable=0    failed=0    skipped=13   rescued=0    ignored=0   
+10.0.1.207                 : ok=51   changed=9    unreachable=0    failed=0    skipped=42   rescued=0    ignored=0   
+10.0.1.246                 : ok=15   changed=4    unreachable=0    failed=0    skipped=13   rescued=0    ignored=0   
+10.0.1.56                  : ok=15   changed=4    unreachable=0    failed=0    skipped=13   rescued=0    ignored=0   
+localhost                  : ok=6    changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+
+
+PLAY [Install pre-requisite packages for Kerberos] *****************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.207]
+ok: [10.0.1.147]
+
+TASK [infrastructure/krb5_client : Include variables] **************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [infrastructure/krb5_client : Install KRB5 client libraries] **************
+ok: [10.0.1.207]
+changed: [10.0.1.56]
+changed: [10.0.1.246]
+changed: [10.0.1.147]
+
+TASK [infrastructure/krb5_client : Create krb5.conf] ***************************
+ok: [10.0.1.207]
+changed: [10.0.1.56]
+changed: [10.0.1.147]
+changed: [10.0.1.246]
+
+TASK [prereqs/kerberos : Include variables] ************************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [prereqs/kerberos : Include variables] ************************************
+skipping: [10.0.1.207]
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+
+TASK [prereqs/kerberos : Install OpenLDAP client libraries] ********************
+skipping: [10.0.1.56]
+skipping: [10.0.1.246]
+skipping: [10.0.1.147]
+changed: [10.0.1.207]
+
+PLAY [Configure Cloudera Manager server for Kerberos] **************************
+
+TASK [cloudera_manager/admin_password/check : Check the default Cloudera Manager admin password] ***
+skipping: [localhost]
+
+TASK [cloudera_manager/admin_password/check : set_fact] ************************
+ok: [localhost]
+
+TASK [cloudera_manager/admin_password/check : Set the playbook to use the non-default Cloudera Manager admin password] ***
+skipping: [localhost]
+
+TASK [cloudera_manager/api_client : set_fact] **********************************
+ok: [localhost]
+
+TASK [Set Cloudera Manager Kerberos configs] ***********************************
+
+TASK [cloudera_manager/config : Get existing configs] **************************
+ok: [localhost]
+
+TASK [cloudera_manager/config : Filter out null configs if necessary] **********
+ok: [localhost]
+
+TASK [cloudera_manager/config : Update configuration endpoint to contain change message] ***
+ok: [localhost]
+
+TASK [cloudera_manager/config : Update configuration (via Cloudera Manager API)] ***
+ok: [localhost]
+
+TASK [cloudera_manager/kerberos : Import KDC admin credentials] ****************
+ok: [localhost]
+
+PLAY RECAP *********************************************************************
+10.0.1.147                 : ok=5    changed=2    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+10.0.1.207                 : ok=6    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+10.0.1.246                 : ok=5    changed=2    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+10.0.1.56                  : ok=5    changed=2    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+localhost                  : ok=7    changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+
+
+PLAY [Enable Auto-TLS] *********************************************************
+
+TASK [extra/patch-auto-tls : Copy patch to machines] ***************************
+skipping: [10.0.1.207]
+
+TASK [extra/patch-auto-tls : Backup cert.py] ***********************************
+skipping: [10.0.1.207]
+
+TASK [extra/patch-auto-tls : Fix cert.py] **************************************
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/admin_password/check : Check the default Cloudera Manager admin password] ***
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/admin_password/check : set_fact] ************************
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/admin_password/check : Set the playbook to use the non-default Cloudera Manager admin password] ***
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/api_client : set_fact] **********************************
+ok: [10.0.1.207]
+
+TASK [extra/auto-tls : Check if password or key is used to connect to machines] ***
+ok: [10.0.1.207]
+
+TASK [extra/auto-tls : DEBUG Auto-TLS using password] **************************
+skipping: [10.0.1.207]
+
+TASK [extra/auto-tls : Enable Auto-TLS] ****************************************
+skipping: [10.0.1.207]
+
+TASK [extra/auto-tls : Set node_key on one line] *******************************
+ok: [10.0.1.207]
+
+TASK [extra/auto-tls : DEBUG Auto-TLS using key] *******************************
+ok: [10.0.1.207] => {
+    "msg": "{\n    \"customCA\" : false,\n    \"configureAllServices\" : \"true\",\n    \"sshPort\" : 22,\n        \"userName\" : \"root\",\n    \"privateKey\": \"-----BEGIN RSA PRIVATE KEY-----\\nMIIEogIBAAKCAQEAnDkofbmzEQqj4GnLJc+ve1Bzjs/M3r43Rkv487VSZut123P3\\nD0U5l9zcwU1tVSeDOQP8eAAqKJdkOffOW/qjvDlvFf6rRsTNcT/4En6TL7bv19My\\nWHI9pJfF1jbudkTpFl9Q4ubqfYotkeguVEN2/E0dR22W72H5yax2+Q2WFh6j26dF\\nbpPugmlAPb2JdWJvrjpo6ktxbxIQGGIEZ2YhPWWHpBu+RHZxpOejPRfEF4+kQXwx\\nWKBWORkOCe4JzijpzK3Yexugsp6deXpq1/nOjlw/Yd90mjEF8YE8rvJJUWHhc/jy\\n2mGWrN+iTkoBX3/znrV8mhe51rilS7kdc6WQ9QIDAQABAoIBAH1dBNg3X7HqNu2M\\nGABEtE4hlknhCUcpn5OivalcNT7v7ojnezfe1kO+ccwRBQ6TgaMMRtpJT4t5SW2X\\nJRr8e848zJ762ZkVrsMVkU3OEvD0PW2VRk5hhoQBYznupNd1nxJb9L3QjhWl/8GZ\\nbywhY2c9vqQmFjwNBHTJGEPtmiYuuHb63qfnMg01BRholrWHYnGNe/AWbblLNdJf\\n7KvOM1EAvQGyCfBw02Nx12gr2WMJtsF2dzFNqFYadAp3Y2xHT2zX1MCpkH/5sfMM\\nUaerX0XiRbKPwSjWUhkxx8OAmhTaxIfh1jB2+1AD5mKI+yFrW9z/BC3bzMjuztMa\\ngrcR9cECgYEA13C0LhOWpFPaoFTl+FQsg7EfSFdquLd+4i8Lwd9Pcvn8ZLPzm9Xe\\ngCNlex6/ZtRe59JgpiHbUyyxsHw1nPFIegiSV4MXJfLd2Wp2Fz/P5jxs5r7zn4YA\\nyfsunqNfcAn3dN2WCyWJgeHTw0sexQKGQDl7dIwaDdsMN+QBfCnuP6UCgYEAuaJz\\nN5X/PfE/V5KYxHgnMm9kNFWDXSQy+3RRQXAK4rPf/0oZGEzExrZQDH02KSdZ6JVr\\nrG6/3ROGvMbnmWPHLePWzWKhJbdsXn6GrTqwJ9GTEzzXnPDo0xk632c1EZKC4zsb\\n/Ii4z9YpzQ7YR/sGKmuEM1gcvpHJjCU7Xe4WSxECgYAoENGxb/sn/GBASQmrsRvG\\nMf57WaaDS7zRG6a4G2uPGmaR49V+ObvzYKHSz9kQqpYrzrgirVE4mqtBAxiFY2nz\\nJ/zvQXXgnNYdROtJT5i+XKZ0EzcDh8xFw+zbm85366KVnU/2Krjz6qeTPjkuslV9\\nRDNtbVC7Gu2ex0xvZuzj8QKBgCRYENS+MkXPWMZtdilpGMuAEY9Jermen7ipckss\\ng4UVEHLr7/PY++Gnyg5X6WWvRaQKtRUCbd/7tbJ6Atf+N/3dEK4PdFttCPOLNBTw\\nW5LALlpi3Bfm9r51vxgEHdi95ZBVf0o2/m/6jx6NnHyjQfbGLBDdXGtXIa2lkHT4\\nazbxAoGAEuYW0DuNd2fjL9AI2pHrlaWyTsfwMzn/OniaR0DGxA6kkKp/ys3vRD46\\naBqJLCvPw/nKkqAqn5aaO1Kt+Cx94P7WSB/Ul98NPNYwgBFB6kdITFcPLYyQq7kt\\np92EHkeb2vsjXzZoQuQVq9/xOTVifN9bsbMXdbD3FsBVcqiQhpg=\\n-----END RSA PRIVATE KEY-----\"\n} \n    "
+}
+
+TASK [extra/auto-tls : Enable Auto-TLS] ****************************************
+fatal: [10.0.1.207]: FAILED! => {"ansible_facts": {"discovered_interpreter_python": "/usr/bin/python3.6"}, "changed": false, "content": "", "elapsed": 30, "msg": "Status code was -1 and not [200]: Connection failure: timed out", "redirected": false, "status": -1, "url": "http://10.0.1.207:7180/api/v44/cm/commands/generateCmca"}
+...ignoring
+
+TASK [extra/auto-tls-root-ca : Chown all certs for cloudera-scm user to allow certmanager to use it] ***
+skipping: [10.0.1.207]
+
+TASK [extra/auto-tls-root-ca : Check if password or key is used to connect to machines] ***
+skipping: [10.0.1.207]
+
+TASK [extra/auto-tls-root-ca : DEBUG Auto-TLS using password] ******************
+skipping: [10.0.1.207]
+
+TASK [extra/auto-tls-root-ca : Enable Auto-TLS] ********************************
+skipping: [10.0.1.207]
+
+TASK [extra/auto-tls-root-ca : Set node_key on one line] ***********************
+skipping: [10.0.1.207]
+
+TASK [extra/auto-tls-root-ca : DEBUG Auto-TLS using key] ***********************
+skipping: [10.0.1.207]
+
+TASK [extra/auto-tls-root-ca : Enable Auto-TLS] ********************************
+skipping: [10.0.1.207]
+
+TASK [operations/restart_cm : Restart CM] **************************************
+changed: [10.0.1.207]
+
+TASK [operations/restart_cm : wait cloudera-scm-server] ************************
+ok: [10.0.1.207]
+
+TASK [operations/restart_agents : Restart Cloudera Agents] *********************
+changed: [10.0.1.207]
+
+TASK [operations/restart_agents : Pause for 30 seconds for agents] *************
+Pausing for 30 seconds
+(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+ok: [10.0.1.207]
+
+PLAY RECAP *********************************************************************
+10.0.1.207                 : ok=10   changed=2    unreachable=0    failed=0    skipped=14   rescued=0    ignored=1   
+
+
+PLAY [Ensure that the agents are heartbeating] *********************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.207]
+ok: [10.0.1.147]
+
+TASK [cloudera_manager/admin_password/check : Check the default Cloudera Manager admin password] ***
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/admin_password/check : set_fact] ************************
+ok: [10.0.1.207]
+
+TASK [cloudera_manager/admin_password/check : Set the playbook to use the non-default Cloudera Manager admin password] ***
+skipping: [10.0.1.207]
+
+TASK [cloudera_manager/api_client : set_fact] **********************************
+ok: [10.0.1.207]
+ok: [10.0.1.56]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+
+TASK [cloudera_manager/wait_for_heartbeat : Read the Cloudera Manager agent UUID] ***
+ok: [10.0.1.207]
+ok: [10.0.1.246]
+ok: [10.0.1.147]
+ok: [10.0.1.56]
+
+TASK [cloudera_manager/wait_for_heartbeat : Ensure the Cloudera Manager agent is heartbeating] ***
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (30 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (30 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (30 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (30 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (29 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (29 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (29 retries left).
+ok: [10.0.1.207]
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (28 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (28 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (28 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (27 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (27 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (27 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (26 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (26 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (26 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (25 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (25 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (25 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (24 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (24 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (24 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (23 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (23 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (23 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (22 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (22 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (22 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (21 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (21 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (21 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (20 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (20 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (20 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (19 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (19 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (19 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (18 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (18 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (18 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (17 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (17 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (17 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (16 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (16 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (16 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (15 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (15 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (15 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (14 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (14 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (14 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (13 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (13 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (13 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (12 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (12 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (12 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (11 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (11 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (11 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (10 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (10 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (10 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (9 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (9 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (9 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (8 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (8 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (8 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (7 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (7 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (7 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (6 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (6 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (6 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (5 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (5 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (5 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (4 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (4 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (4 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (3 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (3 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (3 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (2 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (2 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (2 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (1 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (1 retries left).
+FAILED - RETRYING: Ensure the Cloudera Manager agent is heartbeating (1 retries left).
+fatal: [10.0.1.56]: FAILED! => {"attempts": 30, "changed": false, "content": "", "elapsed": 0, "msg": "Status code was -1 and not [200]: Request failed: <urlopen error [Errno 113] No route to host>", "redirected": false, "status": -1, "url": "http://10.0.1.207:7180/api/version"}
+fatal: [10.0.1.246]: FAILED! => {"attempts": 30, "changed": false, "content": "", "elapsed": 0, "msg": "Status code was -1 and not [200]: Request failed: <urlopen error [Errno 113] No route to host>", "redirected": false, "status": -1, "url": "http://10.0.1.207:7180/api/version"}
+fatal: [10.0.1.147]: FAILED! => {"attempts": 30, "changed": false, "content": "", "elapsed": 0, "msg": "Status code was -1 and not [200]: Request failed: <urlopen error [Errno 113] No route to host>", "redirected": false, "status": -1, "url": "http://10.0.1.207:7180/api/version"}
+
+NO MORE HOSTS LEFT *************************************************************
+
+PLAY RECAP *********************************************************************
+10.0.1.147                 : ok=3    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+10.0.1.207                 : ok=5    changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+10.0.1.246                 : ok=3    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+10.0.1.56                  : ok=3    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+
