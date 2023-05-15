@@ -1,6 +1,7 @@
 yum remove bind9.16-utils-32:9.16.23-0.9.el8.1.x86_64
 sudo systemctl disable firewalld --now
 systemctl status firewalld
+chmod -R 755 /home/ec2-user/one-script-deploy
 
 
 export CLUSTER_NAME=ofer-test
